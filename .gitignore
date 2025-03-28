@@ -1,2 +1,8 @@
 bin/
 #Ignorar archivos bin
+
+
+.metadata/
+PROGRAMACION/.metadata/
+PROGRAMACION/src/.metadata/
+PROGRAMACION/src/prueba/.metadata/
