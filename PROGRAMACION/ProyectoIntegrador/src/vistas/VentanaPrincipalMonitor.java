@@ -4,6 +4,7 @@
 package vistas;
 
 import javax.swing.*;
+import java.awt.Color;
 
 /**
  * 
@@ -19,6 +20,7 @@ public class VentanaPrincipalMonitor extends JFrame {
 		setJMenuBar(menuBar);
 		
 		JMenu mnNewMenu = new JMenu("Actividades");
+		mnNewMenu.setBackground(new Color(255, 255, 255));
 		menuBar.add(mnNewMenu);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Nueva actividad");
@@ -31,6 +33,7 @@ public class VentanaPrincipalMonitor extends JFrame {
 		mnNewMenu.add(mntmNewMenuItem_2);
 		
 		JButton btnNewButton = new JButton("Salas");
+		btnNewButton.setBackground(new Color(255, 255, 255));
 		menuBar.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Datos Personales");
@@ -40,6 +43,13 @@ public class VentanaPrincipalMonitor extends JFrame {
 		
 		
 		
+		
+		
+	}
+	
+	
+	public void hacerVisible() {
+		setVisible(true);
 	}
 	
 	
