@@ -37,7 +37,7 @@ public class VentanaPrincipalMonitor extends JFrame {
 		menuBar.add(btnNewButton_1);
 		
 		
-		//barra del menú
+		
 		
 		
 	}
