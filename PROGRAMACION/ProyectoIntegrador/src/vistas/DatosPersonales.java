@@ -10,14 +10,6 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class DatosPersonales extends JFrame {
-	private JTextField textNombre;
-	private JTextField textField_1;
-	private JTextField textField;
-	private JTextField textMatricula;
-	private JTextField textCiclo;
-	private JPasswordField passwordField;
-	
 
 	
 		public class DatosPersonales extends JFrame {
@@ -195,11 +187,11 @@ public class DatosPersonales extends JFrame {
 
 		   public void mostrarVentana() {
 			   
-			   ventana.setVisible(true);
+			   setVisible(true);
 		   }
 		    
 		    
 		   
 		    
 		}
-}
+

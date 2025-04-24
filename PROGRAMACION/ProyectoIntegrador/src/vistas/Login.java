@@ -95,6 +95,6 @@ public class Login extends JFrame {
     }
     
     public void mostrarLogin() {
-    	login.setVisible(true);
+    	setVisible(true);
     }
 }
