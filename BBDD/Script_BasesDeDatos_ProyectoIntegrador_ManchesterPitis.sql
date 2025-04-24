@@ -2,6 +2,7 @@ DROP TABLE usuario;
 DROP TABLE inscripciones;
 DROP TABLE sala ;
 DROP TABLE actividades;
+DROP TABLE monitr;
 
 /*Tabla de Usuarios.*/
 CREATE TABLE usuario (
@@ -31,7 +32,8 @@ CREATE TABLE actividades (
     plazas_actividad int NOT NULL,
     sala_id int NOT NULL,
     monitor_id int,
-    FOREIGN KEY (monitor_id) REFERENCES usuario(id)
+    FOREIGN KEY (id_monitor) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (id_sala) REFERENCES usuario(id_usuario)
 );
 
 /*Tabla de Inscripciones*/
@@ -39,15 +41,14 @@ CREATE TABLE inscripciones (
     id int AUTO_INCREMENT PRIMARY KEY,
     usuario_id int,
     actividad_id int,
-    fecha_inscripcion DATE DEFAULT (CURRENT_DATE),
     FOREIGN KEY (usuario_id) REFERENCES usuario(id),
     FOREIGN KEY (actividad_id) REFERENCES actividades(id),
     UNIQUE (usuario_id, actividad_id)
 );
 
-
 /*INSERTS*/
 
+-- Usuarios
 INSERT INTO usuario (nombre_usuario, contrasena, cicloEducativo) VALUES
 ('Turrillo, Hugo', '00000', 'DAW'),
 ('Valdes, Lucia', '00001', 'TAFD'),
@@ -56,24 +57,27 @@ INSERT INTO usuario (nombre_usuario, contrasena, cicloEducativo) VALUES
 ('Martinez, Alvaro', '00004', 'EI'),
 ('Corraliza, Adrian', '00005', 'CI');
 
-INSERT INTO sala (codigo_Sala, tipo_Sala, capacidad_Sala, utilizacion, ocupacion) VALUES
+-- Salas
+INSERT INTO sala (codigo_sala, tipo_sala, capacidad_sala, utilizacion, ocupacion) VALUES
 ('PPA1', 'PABELLON', 40, 91.3, 29.88),
 ('PPA2', 'PABELLON', 40, 36.12, 27.46),
 ('PPA3', 'PABELLON', 40, 2.92, 63.19),
 ('PPIS', 'PISCINA', 40, 2.06, 59.66),
-('PPB1', 'PISTAS DE BALONCESTO', 10, 2.27, 96,13),
+('PPB1', 'PISTAS DE BALONCESTO', 10, 2.27, 96.13),
 ('PPB2', 'PISTAS DE BALONCESTO', 10, 0.18, 94.03),
 ('PPE1', 'PISTAS ATLETISMO', 40, 2.11, 53.28),
 ('PPE2', 'PISTAS ATLETISMO', 40, 0.76, 54.76);
 
-INSERT INTO actividades (nombre_actividad, fecha_actividad, hora_actividad, duracion_actividad, plazas_actividad, sala_id, monitor_id) VALUES
-('Voleybol', '2025-04-15', '10:00:00', 60, 20, 1, 2),
-('Futbol', '2025-04-16', '11:00:00', 60, 15, 2, 3),
-('Baloncesto', '2025-04-17', '09:00:00', 45, 10, 3, 2),
-('Natación', '2025-04-18', '12:00:00', 90, 25, 4, 3),
-('Baloncesto', '2025-04-19', '16:00:00', 90, 10, 5, 2);
+-- Actividades
+INSERT INTO actividades (nombre_actividad, fecha_actividad, hora_actividad, duracion_actividad, plazas_actividad, id_monitor, id_sala) VALUES
+('Voleybol', '2025-04-15', '10:00:00', 60, 20, 2, 1),
+('Futbol', '2025-04-16', '11:00:00', 60, 15, 3, 2),
+('Baloncesto', '2025-04-17', '09:00:00', 45, 10, 2, 3),
+('Natación', '2025-04-18', '12:00:00', 90, 25, 3, 4),
+('Baloncesto', '2025-04-19', '16:00:00', 90, 10, 2, 5);
 
-INSERT INTO inscripciones (usuario_id, actividad_id) VALUES
+-- Inscripciones
+INSERT INTO inscripciones (id_usuario, id_actividad) VALUES
 (1, 1),
 (4, 1),
 (5, 2),
