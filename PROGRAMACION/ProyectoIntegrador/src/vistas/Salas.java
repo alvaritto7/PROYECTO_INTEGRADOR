@@ -11,186 +11,202 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Salas extends JFrame {
-	private JTextField textSala;
-	private JTextField textSala2;
-	private JTextField textSala3;
-	private JTextField textSala4;
-	private JTextField textNumeroSala;
-	private JTextField textNumeroSala2;
-	private JTextField textNumeroSala3;
-	private JTextField textNumeroSala4;
-	
-	
-	public Salas()
-	{
-		setFont(new Font("Dialog", Font.BOLD, 12));
-		setTitle("Salas");
-		
-		textSala = new JTextField();
-		textSala.setBackground(new Color(255, 255, 255));
-		textSala.setColumns(10);
-		
-		textSala2 = new JTextField();
-		textSala2.setColumns(10);
-		textSala2.setBackground(Color.WHITE);
-		
-		JLabel lblNombreSala = new JLabel("Nombre de la Sala:");
-		lblNombreSala.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
-		JLabel lblNombreSala2 = new JLabel("Nombre de la Sala:");
-		lblNombreSala2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
-		JLabel lblNombreSala3 = new JLabel("Nombre de la Sala:");
-		lblNombreSala3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
-		textSala3 = new JTextField();
-		textSala3.setColumns(10);
-		textSala3.setBackground(Color.WHITE);
-		
-		textSala4 = new JTextField();
-		textSala4.setColumns(10);
-		textSala4.setBackground(Color.WHITE);
-		
-		textNumeroSala = new JTextField();
-		textNumeroSala.setColumns(10);
-		textNumeroSala.setBackground(Color.WHITE);
-		
-		JButton btnBorrar = new JButton("Borrar");
-		btnBorrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		
-		JButton btnNuevo_2 = new JButton("Nuevo");
-		
-		JLabel lblNumeroSala = new JLabel("Numero de la Sala:");
-		lblNumeroSala.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
-		JLabel lblNombreSala4 = new JLabel("Nombre de la Sala:");
-		lblNombreSala4.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
-		JLabel lblNumeroSala2 = new JLabel("Numero de la Sala:");
-		lblNumeroSala2.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
-		JLabel lblNumeroSala3 = new JLabel("Numero de la Sala:");
-		lblNumeroSala3.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
-		JLabel lblNumeroSala4 = new JLabel("Numero de la Sala:");
-		lblNumeroSala4.setFont(new Font("Tahoma", Font.BOLD, 12));
-		
-		textNumeroSala2 = new JTextField();
-		textNumeroSala2.setColumns(10);
-		textNumeroSala2.setBackground(Color.WHITE);
-		
-		textNumeroSala3 = new JTextField();
-		textNumeroSala3.setColumns(10);
-		textNumeroSala3.setBackground(Color.WHITE);
-		
-		textNumeroSala4 = new JTextField();
-		textNumeroSala4.setColumns(10);
-		textNumeroSala4.setBackground(Color.WHITE);
-		GroupLayout groupLayout = new GroupLayout(getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(59)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblNombreSala4, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-								.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-									.addComponent(lblNombreSala3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(lblNombreSala2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(lblNombreSala, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(textSala4)
-								.addComponent(textSala3)
-								.addComponent(textSala2)
-								.addComponent(textSala, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblNumeroSala4, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textNumeroSala4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(lblNumeroSala3, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(textNumeroSala3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblNumeroSala2, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblNumeroSala, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-										.addComponent(textNumeroSala, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-										.addComponent(textNumeroSala2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))))
-							.addGap(6))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnNuevo_2, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnGuardar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnBorrar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(26, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(78)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textSala, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNombreSala)
-						.addComponent(lblNumeroSala, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textNumeroSala, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textSala2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNombreSala2)
-						.addComponent(lblNumeroSala2, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textNumeroSala2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textSala3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNombreSala3)
-						.addComponent(lblNumeroSala3, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textNumeroSala3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textSala4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNombreSala4, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNumeroSala4, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textNumeroSala4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnBorrar)
-						.addComponent(btnNuevo_2)
-						.addComponent(btnGuardar))
-					.addGap(21))
-		);
-		getContentPane().setLayout(groupLayout);
-		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		
-		JMenu mnActividades = new JMenu("Actividades");
-		menuBar.add(mnActividades);
-		
-		JMenu mnSalas = new JMenu("Salas");
-		menuBar.add(mnSalas);
-		
-		JMenu mnNewMenu_2 = new JMenu("Datos Personales");
-		menuBar.add(mnNewMenu_2);
-		
-		
-		
-		}
+    // Se declaran los campos de texto para ingresar el nombre y número de las salas
+    private JTextField textSala;
+    private JTextField textSala2;
+    private JTextField textSala3;
+    private JTextField textSala4;
+    private JTextField textNumeroSala;
+    private JTextField textNumeroSala2;
+    private JTextField textNumeroSala3;
+    private JTextField textNumeroSala4;
+
+    // Constructor de la clase, donde se inicializa la interfaz gráfica
+    public Salas() {
+        // Se establece la fuente y tamaño de la fuente para el título de la ventana
+        setFont(new Font("Dialog", Font.BOLD, 12));
+        // Se define el título de la ventana
+        setTitle("Salas");
+
+        // Se inicializan los campos de texto para el nombre de las salas
+        textSala = new JTextField();
+        textSala.setBackground(new Color(255, 255, 255)); // Fondo blanco
+        textSala.setColumns(10); // Tamaño del campo de texto
+        
+        textSala2 = new JTextField();
+        textSala2.setColumns(10);
+        textSala2.setBackground(Color.WHITE);
+        
+        // Se crean etiquetas para los nombres de las salas, cada una con una fuente en negrita
+        JLabel lblNombreSala = new JLabel("Nombre de la Sala:");
+        lblNombreSala.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        JLabel lblNombreSala2 = new JLabel("Nombre de la Sala:");
+        lblNombreSala2.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        JLabel lblNombreSala3 = new JLabel("Nombre de la Sala:");
+        lblNombreSala3.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        // Se inicializan los campos de texto para las demás salas
+        textSala3 = new JTextField();
+        textSala3.setColumns(10);
+        textSala3.setBackground(Color.WHITE);
+
+        textSala4 = new JTextField();
+        textSala4.setColumns(10);
+        textSala4.setBackground(Color.WHITE);
+
+        // Se inicializan los campos de texto para los números de las salas
+        textNumeroSala = new JTextField();
+        textNumeroSala.setColumns(10);
+        textNumeroSala.setBackground(Color.WHITE);
+
+        // Botones que permiten interactuar con las salas (Borrar, Guardar, Nuevo)
+        JButton btnBorrar = new JButton("Borrar");
+        btnBorrar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Lógica del botón "Borrar" (vacío por ahora)
+            }
+        });
+
+        JButton btnGuardar = new JButton("Guardar");
+        btnGuardar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Lógica del botón "Guardar" (vacío por ahora)
+            }
+        });
+
+        JButton btnNuevo_2 = new JButton("Nuevo");
+
+        // Se crean las etiquetas para los números de las salas
+        JLabel lblNumeroSala = new JLabel("Numero de la Sala:");
+        lblNumeroSala.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        JLabel lblNombreSala4 = new JLabel("Nombre de la Sala:");
+        lblNombreSala4.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        JLabel lblNumeroSala2 = new JLabel("Numero de la Sala:");
+        lblNumeroSala2.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        JLabel lblNumeroSala3 = new JLabel("Numero de la Sala:");
+        lblNumeroSala3.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        JLabel lblNumeroSala4 = new JLabel("Numero de la Sala:");
+        lblNumeroSala4.setFont(new Font("Tahoma", Font.BOLD, 12));
+
+        // Se inicializan los campos de texto para los números de las salas
+        textNumeroSala2 = new JTextField();
+        textNumeroSala2.setColumns(10);
+        textNumeroSala2.setBackground(Color.WHITE);
+
+        textNumeroSala3 = new JTextField();
+        textNumeroSala3.setColumns(10);
+        textNumeroSala3.setBackground(Color.WHITE);
+
+        textNumeroSala4 = new JTextField();
+        textNumeroSala4.setColumns(10);
+        textNumeroSala4.setBackground(Color.WHITE);
+
+        // Se define el layout de la ventana utilizando GroupLayout
+        GroupLayout groupLayout = new GroupLayout(getContentPane());
+        groupLayout.setHorizontalGroup(
+            // Agrupamos los elementos de la interfaz en una fila horizontal
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(59)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+                        .addGroup(groupLayout.createSequentialGroup()
+                            .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+                                // Añadimos las etiquetas y los campos de texto de nombre de la sala
+                                .addComponent(lblNombreSala4, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+                                    .addComponent(lblNombreSala3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNombreSala2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblNombreSala, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+                                .addComponent(textSala4)
+                                .addComponent(textSala3)
+                                .addComponent(textSala2)
+                                .addComponent(textSala, GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE))
+                            .addGap(18)
+                            // Añadimos las etiquetas y los campos de texto de número de la sala
+                            .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                                .addGroup(groupLayout.createSequentialGroup()
+                                    .addComponent(lblNumeroSala4, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(ComponentPlacement.UNRELATED)
+                                    .addComponent(textNumeroSala4, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(groupLayout.createSequentialGroup()
+                                    .addComponent(lblNumeroSala3, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(ComponentPlacement.UNRELATED)
+                                    .addComponent(textNumeroSala3, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))
+                                .addGroup(groupLayout.createSequentialGroup()
+                                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(lblNumeroSala2, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblNumeroSala, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(ComponentPlacement.RELATED)
+                                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                                        .addComponent(textNumeroSala, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(textNumeroSala2, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE))))
+                            .addGap(6))
+                        .addGroup(groupLayout.createSequentialGroup()
+                            // Añadimos los botones al final de la ventana
+                            .addComponent(btnNuevo_2, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addComponent(btnGuardar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(ComponentPlacement.RELATED)
+                            .addComponent(btnBorrar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        // Definimos la disposición vertical de los componentes
+        groupLayout.setVerticalGroup(
+            groupLayout.createParallelGroup(Alignment.LEADING)
+                .addGroup(groupLayout.createSequentialGroup()
+                    .addGap(78)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+                        // Organizamos los campos de texto de nombre de sala y número de sala
+                        .addComponent(textSala, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNombreSala)
+                        .addComponent(lblNumeroSala, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textNumeroSala, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGap(18)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+                        // Organizamos los campos de texto de nombre de sala 2 y número de sala 2
+                        .addComponent(textSala2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNombreSala2)
+                        .addComponent(lblNumeroSala2, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textNumeroSala2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGap(18)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+                        // Organizamos los campos de texto de nombre de sala 3 y número de sala 3
+                        .addComponent(textSala3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNombreSala3)
+                        .addComponent(lblNumeroSala3, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textNumeroSala3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addGap(18)
+                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+                        // Organizamos los campos de texto de nombre de sala 4 y número de sala 4
+                        .addComponent(textSala4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNombreSala4, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblNumeroSala4, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(textNumeroSala4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                    // Organizamos los botones al final de la ventana
+                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+                        .addComponent(btnBorrar)
+                        .addComponent(btnNuevo_2)
+                        .addComponent(btnGuardar))
+                    .addGap(21))
+        );
+
+        // Aplicamos el layout a la ventana
+        getContentPane().setLayout(groupLayout);
+    }
+    
+    //hacemos visible la ventana
+    public void hacerVisible() {
+    	setVisible(true);
+    }
 }
 
