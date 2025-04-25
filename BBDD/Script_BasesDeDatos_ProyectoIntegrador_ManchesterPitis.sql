@@ -1,8 +1,8 @@
-DROP TABLE usuario;
-DROP TABLE inscripciones;
-DROP TABLE sala ;
-DROP TABLE actividades;
-DROP TABLE monitr;
+
+DROP TABLE if exists inscripciones;
+DROP TABLE if exists actividades;
+DROP TABLE if exists sala ;
+DROP TABLE if exists usuario;
 
 /*Tabla de Usuarios.*/
 CREATE TABLE usuario (
@@ -32,8 +32,8 @@ CREATE TABLE actividades (
     plazas_actividad int NOT NULL,
     sala_id int NOT NULL,
     monitor_id int,
-    FOREIGN KEY (id_monitor) REFERENCES usuario(id_usuario),
-    FOREIGN KEY (id_sala) REFERENCES usuario(id_usuario)
+    FOREIGN KEY (monitor_id) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (sala_id) REFERENCES usuario(id_usuario)
 );
 
 /*Tabla de Inscripciones*/
@@ -41,8 +41,8 @@ CREATE TABLE inscripciones (
     id int AUTO_INCREMENT PRIMARY KEY,
     usuario_id int,
     actividad_id int,
-    FOREIGN KEY (usuario_id) REFERENCES usuario(id),
-    FOREIGN KEY (actividad_id) REFERENCES actividades(id),
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id_usuario),
+    FOREIGN KEY (actividad_id) REFERENCES actividades(id_actividades),
     UNIQUE (usuario_id, actividad_id)
 );
 
@@ -69,7 +69,7 @@ INSERT INTO sala (codigo_sala, tipo_sala, capacidad_sala, utilizacion, ocupacion
 ('PPE2', 'PISTAS ATLETISMO', 40, 0.76, 54.76);
 
 -- Actividades
-INSERT INTO actividades (nombre_actividad, fecha_actividad, hora_actividad, duracion_actividad, plazas_actividad, id_monitor, id_sala) VALUES
+INSERT INTO actividades (nombre_actividad, fecha_actividad, hora_actividad, duracion_actividad, plazas_actividad, monitor_id, sala_id) VALUES
 ('Voleybol', '2025-04-15', '10:00:00', 60, 20, 2, 1),
 ('Futbol', '2025-04-16', '11:00:00', 60, 15, 3, 2),
 ('Baloncesto', '2025-04-17', '09:00:00', 45, 10, 2, 3),
@@ -77,7 +77,7 @@ INSERT INTO actividades (nombre_actividad, fecha_actividad, hora_actividad, dura
 ('Baloncesto', '2025-04-19', '16:00:00', 90, 10, 2, 5);
 
 -- Inscripciones
-INSERT INTO inscripciones (id_usuario, id_actividad) VALUES
+INSERT INTO inscripciones (usuario_id, actividad_id) VALUES
 (1, 1),
 (4, 1),
 (5, 2),
