@@ -12,12 +12,12 @@ import java.awt.event.ActionEvent;
 
 
 	
-		public class DatosPersonales extends JFrame {
+		public class DatosPersonales extends JPanel {
 
 		    // Campos de texto para coger datos del usuario
 		    private JTextField textNombre;
-		    private JTextField textField_1; // Apellidos
-		    private JTextField textField;   // Email
+		    private JTextField textApellidos; // Apellidos
+		    private JTextField textMail;   // Email
 		    private JTextField textMatricula;
 		    private JTextField textCiclo;
 		    private JPasswordField passwordField; // Campo para contraseña (oculta)
@@ -32,25 +32,31 @@ import java.awt.event.ActionEvent;
 		        textNombre = new JTextField();
 		        textNombre.setBackground(Color.WHITE);
 		        textNombre.setColumns(10);
+		        getContentPane().add(textNombre);
 
-		        textField_1 = new JTextField(); // Apellidos
-		        textField_1.setBackground(Color.WHITE);
-		        textField_1.setColumns(10);
+		        textApellidos = new JTextField(); // Apellidos
+		        textApellidos.setBackground(Color.WHITE);
+		        textApellidos.setColumns(10);
+		        getContentPane().add(textApellidos);
 
-		        textField = new JTextField(); // Email
-		        textField.setBackground(Color.WHITE);
-		        textField.setColumns(10);
+		        textMail = new JTextField(); // Email
+		        textMail.setBackground(Color.WHITE);
+		        textMail.setColumns(10);
+		        getContentPane().add(textMail);
 
 		        textMatricula = new JTextField(); //matricula
 		        textMatricula.setBackground(Color.WHITE);
 		        textMatricula.setColumns(10);
+		        getContentPane().add(textMatricula);
 
 		        textCiclo = new JTextField(); //ciclo
 		        textCiclo.setBackground(Color.WHITE);
 		        textCiclo.setColumns(10);
+		        getContentPane().add(textCiclo);
 
 		        // Campo para contraseña
 		        passwordField = new JPasswordField();
+		        getContentPane().add(passwordField);
 
 		        // Crear etiquetas para cada campo
 		        JLabel lblNombre = new JLabel("Nombre:");
@@ -90,83 +96,7 @@ import java.awt.event.ActionEvent;
 		        
 		        JButton btnNuevo_2 = new JButton("Nuevo");
 
-		        // Diseño del panel con GroupLayout(tipo de layout) para alinear componentes
-		        GroupLayout groupLayout = new GroupLayout(getContentPane());
-		        groupLayout.setHorizontalGroup(
-		            groupLayout.createParallelGroup(Alignment.LEADING)
-		                .addGroup(groupLayout.createSequentialGroup()
-		                		
-		                		//TODO
-		                    .addGap(59)
-		                    .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-		                        // Campo Contraseña
-		                        .addGroup(groupLayout.createSequentialGroup()
-		                            .addComponent(lblContraseña, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-		                            .addPreferredGap(ComponentPlacement.RELATED)
-		                            .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 356, GroupLayout.PREFERRED_SIZE))
-		                        // Campos de texto (nombre, apellidos, etc.)
-		                        .addGroup(groupLayout.createSequentialGroup()
-		                            .addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-		                                .addComponent(lblEmail, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		                                .addComponent(lblApellidos, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		                                .addComponent(lblNombre, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-		                                .addComponent(lblMatricula, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
-		                            .addPreferredGap(ComponentPlacement.RELATED)
-		                            .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-		                                .addComponent(textMatricula, GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-		                                .addComponent(textField, GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-		                                .addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-		                                .addComponent(textNombre, GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)))
-		                        // Botones en la parte inferior
-		                        .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-		                            .addComponent(btnNuevo_2, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-		                            .addPreferredGap(ComponentPlacement.RELATED)
-		                            .addComponent(btnGuardar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE)
-		                            .addPreferredGap(ComponentPlacement.RELATED)
-		                            .addComponent(btnBorrar, GroupLayout.PREFERRED_SIZE, 73, GroupLayout.PREFERRED_SIZE))
-		                        // Campo ciclo
-		                        .addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-		                            .addComponent(lblCiclo, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-		                            .addPreferredGap(ComponentPlacement.RELATED)
-		                            .addComponent(textCiclo, GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)))
-		                    .addGap(125))
-		        );
-
-		        groupLayout.setVerticalGroup(
-		            groupLayout.createParallelGroup(Alignment.LEADING)
-		                .addGroup(groupLayout.createSequentialGroup()
-		                    .addGap(78)
-		                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-		                        .addComponent(textNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                        .addComponent(lblNombre))
-		                    .addGap(18)
-		                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-		                        .addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                        .addComponent(lblApellidos))
-		                    .addGap(18)
-		                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-		                        .addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-		                        .addComponent(lblEmail))
-		                    .addGap(18)
-		                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-		                        .addComponent(lblMatricula)
-		                        .addComponent(textMatricula, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		                    .addGap(18)
-		                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-		                        .addComponent(lblContraseña, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-		                        .addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		                    .addGap(18)
-		                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-		                        .addComponent(lblCiclo, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-		                        .addComponent(textCiclo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-		                    .addPreferredGap(ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-		                    .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-		                        .addComponent(btnBorrar)
-		                        .addComponent(btnNuevo_2)
-		                        .addComponent(btnGuardar))
-		                    .addGap(21))
-		        );
-
+		        
 		        // Aplica el layout configurado a la ventana
 		        getContentPane().setLayout(groupLayout);
 
