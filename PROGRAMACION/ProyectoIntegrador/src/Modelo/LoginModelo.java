@@ -1,4 +1,4 @@
-package vistas;
+package Modelo;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,13 +17,12 @@ public class LoginModelo {
 	private String tipo_usuario = "A";
 
     public LoginModelo() {
-        try 
-        {	
-        	//Class.forName(driver);
+        
+    	try {	
             conexion = DriverManager.getConnection(url, usuario, password);
         } 
-        catch (SQLException e) 
-        {
+        
+    	catch (SQLException e) {
         	System.out.println("Error de conexión con la BBDD");
             e.printStackTrace();
         }
@@ -36,17 +35,17 @@ public class LoginModelo {
             ResultSet rs = stmt.executeQuery();
 
             if (!rs.next()) {
-                return "Usuario no existe"; // Usuario no encontrado
+                return "Usuario no existe"; // Cuando no se encuentra al Usuario 
             }
 
             String passwordCorrecta = rs.getString("password");
             if (!passwordCorrecta.equals(password)) {
-                return "Contraseña incorrecta"; // Usuario existe, pero la contraseña no coincide
+                return "Contraseña incorrecta"; // El Usuario es correcto, sin embargo no coincide con la contraseña asignada a este.
             }
             
             this.tipo_usuario = rs.getString("tipo_usuario");
 
-            return "Login exitoso"; // Usuario y contraseña correctos
+            return "Login exitoso"; // Tanto Usuario como Contraseña son correctos.
 
         } catch (SQLException e) {
             
@@ -54,8 +53,7 @@ public class LoginModelo {
         }
     }
     
-    public String getTipo_usuario()
-    {
+    public String getTipo_usuario() {
     	return this.tipo_usuario;
     }
     

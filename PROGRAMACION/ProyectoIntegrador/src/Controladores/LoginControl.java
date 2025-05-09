@@ -1,13 +1,19 @@
-package vistas;
+package Controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
+import Modelo.LoginModelo;
+import vistas.Alumno;
+import vistas.LoginVista;
+import vistas.Monitor;
+
 public class LoginControl {
-    private LoginModelo modelo;
     
-      private LoginVista vista;
+	private LoginModelo modelo;
+    
+    private LoginVista vista;
 
     public LoginControl(LoginModelo modelo, LoginVista vista) {
         this.modelo = modelo; 
@@ -28,19 +34,19 @@ public class LoginControl {
                         break;
                         
                     case "Contraseña incorrecta":
-                       JOptionPane.showMessageDialog(vista, "La contraseña introducida no es correcta.");
+                       JOptionPane.showMessageDialog(vista, "Contraseña Incorrecta, porfavor vuelva a intentarlo.");
                        
                         break;
+                    
                     case "Login exitoso":
                      JOptionPane.showMessageDialog(vista, "Login exitoso!");
                        vista.dispose();                        
                         modelo.cerrarConexion(); 
-                        if(modelo.getTipo_usuario().equals("A"))
-                        {
+                        
+                        if(modelo.getTipo_usuario().equals("A")) {
                         	new Alumno().setVisible(true);
                         }
-                        else
-                        {
+                        else {
                         	new Monitor().setVisible(true);
                         }
                         

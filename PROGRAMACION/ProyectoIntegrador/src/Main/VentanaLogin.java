@@ -1,7 +1,7 @@
-package vistas;
+package Main;
 
-import vistas.LoginControl;
-import vistas.LoginModelo;
+import Controladores.LoginControl;
+import Modelo.LoginModelo;
 import vistas.LoginVista;
 
 public class VentanaLogin {
