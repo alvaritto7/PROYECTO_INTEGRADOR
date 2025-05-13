@@ -1,6 +1,9 @@
 package vistas;
 
 import javax.swing.*;
+
+import Controladores.LoginControl;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -9,6 +12,8 @@ public class LoginVista extends JFrame {
 	private JTextField txtUsuario;
 	private JPasswordField txtPassword;
 	private JButton btnLogin;
+	
+	private LoginControl escuchador;
 	
 	
 	
@@ -47,6 +52,9 @@ public class LoginVista extends JFrame {
 		btnLogin.setLocation(169, 108);
 		btnLogin.setSize(93, 30);
 		getContentPane().add(btnLogin);
+		
+		escuchador = new LoginControl(this);
+		btnLogin.addActionListener(escuchador);
 	}
 	
 	 public JTextField getTxtUsuario() {
@@ -60,4 +68,17 @@ public class LoginVista extends JFrame {
 	 public JButton getBtnLogin() {
 	        return btnLogin;
 	    }
+	 
+	 public String getUsuario() {
+		    return txtUsuario.getText();
+		}
+	 
+	 public String getPassword() {
+		    return new String(txtPassword.getPassword());
+		}
+	 
+	 public void hacerVisible() {
+	        setVisible(true);
+	    }
+
 }

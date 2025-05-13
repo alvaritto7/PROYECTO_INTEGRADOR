@@ -10,9 +10,9 @@ import java.sql.SQLException;
 public class LoginModelo {
     private Connection conexion;
     private String driver = "com.mysql.cj.jdbc.Driver";
-	private String url = "jdbc:mysql://localhost/login";
+	private String url = "jdbc:mysql://localhost/Script_BasesDeDatos_ProyectoIntegrador_ManchesterPitis";
 	private String usuario =  "root";
-	private String password = "Telerin12";
+	private String password = "11111111";
 	
 	private String tipo_usuario = "A";
 
@@ -29,7 +29,8 @@ public class LoginModelo {
     }
 
     public String validarUsuario(String usuario, String password) {
-        String consultaUsuario = "SELECT password, tipo_usuario FROM usuarios WHERE usuario = ?";
+    	String consultaUsuario = "SELECT password, tipo_usuario FROM usuario WHERE nombre_usuario = ?";
+
         try (PreparedStatement stmt = conexion.prepareStatement(consultaUsuario)) {
             stmt.setString(1, usuario);            
             ResultSet rs = stmt.executeQuery();
@@ -49,7 +50,7 @@ public class LoginModelo {
 
         } catch (SQLException e) {
             
-            return "Error";
+            return "Error "+ e.getMessage();
         }
     }
     
