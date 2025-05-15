@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class MisActividadesMonitor extends JPanel {
     private JTextField textFecha;
@@ -30,16 +32,21 @@ public class MisActividadesMonitor extends JPanel {
         textSala = new JTextField(10);
 
         JButton btnNuevo = new JButton("Nuevo");
-        JButton btnGuardar = new JButton("Guardar");
         JButton btnBorrar = new JButton("Borrar");
+        
+        JButton btnNewButton = new JButton("Editar");
+        btnNewButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
 
         // Layout general
         GroupLayout layout = new GroupLayout(this);
         layout.setHorizontalGroup(
         	layout.createParallelGroup(Alignment.CENTER)
         		.addGroup(layout.createSequentialGroup()
-        			.addContainerGap(10, Short.MAX_VALUE)
-        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        			.addContainerGap(28, Short.MAX_VALUE)
+        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
         				.addGroup(layout.createSequentialGroup()
         					.addGroup(layout.createParallelGroup(Alignment.LEADING)
         						.addComponent(lblFecha)
@@ -55,14 +62,13 @@ public class MisActividadesMonitor extends JPanel {
         						.addComponent(lblSala)
         						.addComponent(textSala, 119, 119, 119))
         					.addGap(10))
-        				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-        					.addGroup(layout.createSequentialGroup()
-        						.addComponent(btnNuevo)
-        						.addGap(18)
-        						.addComponent(btnGuardar))
-        					.addGap(6)
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(btnNewButton)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(btnNuevo)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
         					.addComponent(btnBorrar)
-        					.addGap(41))))
+        					.addGap(126))))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
@@ -77,15 +83,25 @@ public class MisActividadesMonitor extends JPanel {
         				.addComponent(textHora, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addComponent(textActividad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addComponent(textSala, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 337, Short.MAX_VALUE)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(btnNuevo)
-        				.addComponent(btnGuardar)
-        				.addComponent(btnBorrar))
+        				.addComponent(btnBorrar)
+        				.addComponent(btnNewButton))
         			.addGap(23))
         );
         setLayout(layout);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
+        
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                EditarActividadPanel editarVentana = new EditarActividadPanel();
+                editarVentana.setVisible(true);
+    }
+    
+    
+});
     }
 }
+

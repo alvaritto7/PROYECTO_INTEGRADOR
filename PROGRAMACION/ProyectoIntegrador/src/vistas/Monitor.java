@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class Monitor extends JFrame {
-    private JPanel panelContenido;
+    protected JPanel panelContenido;
     private JLabel lblTitulo;
 
     public Monitor() {
@@ -73,6 +73,7 @@ public class Monitor extends JFrame {
         cl.show(panelContenido, nombreVista);
         lblTitulo.setText(titulo);
     }
+    
 
     
 }
