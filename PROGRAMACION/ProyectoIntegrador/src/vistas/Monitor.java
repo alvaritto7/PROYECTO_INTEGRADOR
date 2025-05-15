@@ -55,7 +55,7 @@ public class Monitor extends JFrame {
         add(panelContenido, BorderLayout.CENTER);
 
         // Vistas
-        JPanel vistaCrearActividades = new VistaListaActividadesMonitor();
+        JPanel vistaCrearActividades = new VistaListaActividadesMonitor(this);
         JPanel vistaMisInscripciones = new VistaListaActividades();
         JPanel vistaSalas = new VistaListaSalas();
         JPanel vistaDatosSala = new VistaDatosSala(this);
