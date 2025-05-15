@@ -2,7 +2,7 @@ package vistas;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 
 public class Monitor extends JFrame {
     protected JPanel panelContenido;
@@ -45,35 +45,45 @@ public class Monitor extends JFrame {
         panelContenido = new JPanel(new CardLayout());
         add(panelContenido, BorderLayout.CENTER);
 
-        JPanel panelActividades = new MisActividadesMonitor();
+        JPanel panelActividades = new MisActividadesMonitor(this);
         JPanel panelSalas = new Salas();
         JPanel panelDatosPersonales = new DatosPersonalesMonitor();
+
+        EditarActividadPanel panelEditar = new EditarActividadPanel(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mostrarVista("actividades", "Mis Actividades");
+            }
+        });
 
         panelContenido.add(panelActividades, "actividades");
         panelContenido.add(panelSalas, "salas");
         panelContenido.add(panelDatosPersonales, "datospersonales");
+        panelContenido.add(panelEditar, "editar");
 
-        mntmMisActividades.addActionListener((ActionEvent e) -> {
-            mostrarVista("actividades", "Mis Actividades");
+        mntmMisActividades.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mostrarVista("actividades", "Mis Actividades");
+            }
         });
 
-        mntmVerSalas.addActionListener((ActionEvent e) -> {
-            mostrarVista("salas", "Salas");
+        mntmVerSalas.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mostrarVista("salas", "Salas");
+            }
         });
 
-        mntmDatosPersonales.addActionListener((ActionEvent e) -> {
-            mostrarVista("datospersonales", "Datos Personales");
+        mntmDatosPersonales.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mostrarVista("datospersonales", "Datos Personales");
+            }
         });
 
         mostrarVista("datospersonales", "Datos Personales");
     }
 
-    private void mostrarVista(String nombreVista, String titulo) {
-        CardLayout cl = (CardLayout) (panelContenido.getLayout());
+    public void mostrarVista(String nombreVista, String titulo) {
+        CardLayout cl = (CardLayout) panelContenido.getLayout();
         cl.show(panelContenido, nombreVista);
         lblTitulo.setText(titulo);
     }
-    
-
-    
 }

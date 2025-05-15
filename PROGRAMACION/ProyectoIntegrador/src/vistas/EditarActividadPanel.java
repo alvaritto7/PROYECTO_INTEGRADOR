@@ -2,52 +2,29 @@ package vistas;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EditarActividadPanel extends Monitor {
-    private JPanel panelEditar;
+public class EditarActividadPanel extends JPanel {
+    public EditarActividadPanel(ActionListener volverAMisActividades) {
+        setLayout(new GridLayout(5, 2, 10, 10));
 
-    public EditarActividadPanel() {
-        super(); // hereda todo de Monitor
+        add(new JLabel("Fecha:"));
+        add(new JTextField());
 
-        panelContenido.removeAll();
+        add(new JLabel("Hora:"));
+        add(new JTextField());
 
-        panelEditar = new JPanel();
-        panelEditar.setLayout(new GridLayout(5, 2, 10, 10));
+        add(new JLabel("Actividad:"));
+        add(new JTextField());
 
-        panelEditar.add(new JLabel("Fecha:"));
-        panelEditar.add(new JTextField());
-
-        panelEditar.add(new JLabel("Hora:"));
-        panelEditar.add(new JTextField());
-
-        panelEditar.add(new JLabel("Actividad:"));
-        panelEditar.add(new JTextField());
-
-        panelEditar.add(new JLabel("Sala:"));
-        panelEditar.add(new JTextField());
+        add(new JLabel("Sala:"));
+        add(new JTextField());
 
         JButton btnGuardar = new JButton("Guardar");
         JButton btnCancelar = new JButton("Cancelar");
 
-        panelEditar.add(btnGuardar);
-        panelEditar.add(btnCancelar);
-
-        panelContenido.add(panelEditar, "editar");
-
-        CardLayout cl = (CardLayout) panelContenido.getLayout();
-        cl.show(panelContenido, "editar");
-
-        // Acción para volver a la vista principal
-        ActionListener volverAMisActividades = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose(); // Cierra la ventana actual
-                // Si quieres que reabra la ventana principal, hazlo aquí:
-                Monitor principal = new Monitor();
-                principal.setVisible(true);
-            }
-        };
+        add(btnGuardar);
+        add(btnCancelar);
 
         btnGuardar.addActionListener(volverAMisActividades);
         btnCancelar.addActionListener(volverAMisActividades);
