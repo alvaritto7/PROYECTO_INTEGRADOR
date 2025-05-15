@@ -11,7 +11,7 @@ public class Alumno extends JFrame {
     public Alumno() {
       setTitle("ALUMNO");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 400);
+        setSize(800, 600);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -21,7 +21,7 @@ public class Alumno extends JFrame {
         JMenu mnActividades = new JMenu("Actividades");
         menuBar.add(mnActividades);
 
-        JMenuItem mntmMisActividades = new JMenuItem("Mis actividades");
+        JMenuItem mntmMisActividades = new JMenuItem("Inscripciones");
         mnActividades.add(mntmMisActividades);
 
         JMenuItem mntmActividadesDisponibles = new JMenuItem("Actividades disponibles");
@@ -42,20 +42,25 @@ public class Alumno extends JFrame {
         panelContenido = new JPanel(new CardLayout());
         add(panelContenido, BorderLayout.CENTER);
 
-        JPanel panelMisActividades = new MisActividadesAlumno();
-        JPanel panelActividadesDisponibles = new ActividadesDisponiblesAlumnos();
-        JPanel panelDatosPersonales = new DatosPersonalesAlumno();
-
-        panelContenido.add(panelMisActividades, "misactividades");
-        panelContenido.add(panelActividadesDisponibles, "actividadesdisponibles");
-        panelContenido.add(panelDatosPersonales, "datospersonales");
+        //JPanel panelMisActividadesAlumno = new MisActividadesAlumno();
+        JPanel VistaListaActividades = new VistaListaActividades();
+       // JPanel panelActividadesDisponibles = new ActividadesDisponiblesAlumnos();
+        JPanel VistaListaActividadesAlumno = new VistaListaActividadesAlumno();
+        //JPanel panelDatosPersonales = new DatosPersonalesAlumno();
+        JPanel VistaDatosAlumno = new VistaDatosAlumno();
+        //panelContenido.add(panelMisActividadesAlumno, "misactividades");
+        panelContenido.add(VistaListaActividades, "misactividades");
+        panelContenido.add(VistaListaActividadesAlumno, "actividadesdisponibles");
+        panelContenido.add(VistaDatosAlumno, "datospersonales");
 
         mntmMisActividades.addActionListener((ActionEvent e) -> {
-            mostrarVista("misactividades", "Mis Actividades");
+            //mostrarVista("misactividades", "Inscripciones");
+        	 mostrarVista("misactividades", " ");
         });
 
         mntmActividadesDisponibles.addActionListener((ActionEvent e) -> {
-            mostrarVista("actividadesdisponibles", "Actividades Disponibles");
+           // mostrarVista("actividadesdisponibles", "Actividades Disponibles");
+        	 mostrarVista("actividadesdisponibles", " ");
         });
 
         mntmDatosPersonales.addActionListener((ActionEvent e) -> {
