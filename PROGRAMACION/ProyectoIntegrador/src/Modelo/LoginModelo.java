@@ -12,7 +12,7 @@ public class LoginModelo {
     private String driver = "com.mysql.cj.jdbc.Driver";
 	private String url = "jdbc:mysql://localhost/Script_BasesDeDatos_ProyectoIntegrador_ManchesterPitis";
 	private String usuario =  "root";
-	private String password = "111111";
+	private String password = "Telerin12";
 	
 	private String tipo_usuario = "A";
 

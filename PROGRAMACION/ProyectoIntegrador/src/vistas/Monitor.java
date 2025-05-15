@@ -23,7 +23,7 @@ public class Monitor extends JFrame {
         JMenu mnActividades = new JMenu("Actividades");
         menuBar.add(mnActividades);
 
-        JMenuItem mntmCrearActividades = new JMenuItem("Crear actividades");
+        JMenuItem mntmCrearActividades = new JMenuItem("Listad de actividades");
         mnActividades.add(mntmCrearActividades);
 
         JMenuItem mntmMisInscripciones = new JMenuItem("Mis Inscripciones");
