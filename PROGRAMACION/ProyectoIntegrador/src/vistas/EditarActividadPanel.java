@@ -1,24 +1,44 @@
 package vistas;
 
 import javax.swing.*;
+
+import Controladores.VolverListener;
+import Modelo.Actividad;
+
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class EditarActividadPanel extends JPanel {
-    public EditarActividadPanel(ActionListener volverAMisActividades) {
+	
+	private Monitor monitor;
+	//TODO incluir AQUI los JTextField con nombre como atributos
+	//para luego poder hacer getters y setters de la información que hay dentro.
+	JTextField nombre;
+	JTextField fecha;
+	JTextField hora;
+	JTextField sala;
+	
+	
+    public EditarActividadPanel(Monitor monitor, Actividad actividad) {
         setLayout(new GridLayout(5, 2, 10, 10));
 
+        add(new JLabel("Actividad:"));
+        nombre = new JTextField(actividad.getNombre());
+        add(nombre);
+        
         add(new JLabel("Fecha:"));
-        add(new JTextField());
+        fecha = new JTextField(actividad.getFecha());
+        add(fecha);
 
         add(new JLabel("Hora:"));
-        add(new JTextField());
+        hora = new JTextField(actividad.getHora());
+        add(hora);
 
-        add(new JLabel("Actividad:"));
-        add(new JTextField());
-
+        
+        
         add(new JLabel("Sala:"));
-        add(new JTextField());
+        sala = new JTextField(actividad.getIdSala());
+        add(sala);
 
         JButton btnGuardar = new JButton("Guardar");
         JButton btnCancelar = new JButton("Cancelar");
@@ -26,7 +46,9 @@ public class EditarActividadPanel extends JPanel {
         add(btnGuardar);
         add(btnCancelar);
 
-        btnGuardar.addActionListener(volverAMisActividades);
-        btnCancelar.addActionListener(volverAMisActividades);
+        VolverListener escucharVolver = new VolverListener(monitor);
+        //TODO este de guardar no puede tener el mismo Listener (de momento ok pero hay que cambiarlo)
+        btnGuardar.addActionListener(escucharVolver);
+        btnCancelar.addActionListener(escucharVolver);
     }
 }

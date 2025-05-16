@@ -2,21 +2,24 @@ package Controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
-import Modelo.LoginModelo;
+import Modelo.Actividad;
+import Modelo.AccesoBD;
 import vistas.Alumno;
 import vistas.LoginVista;
 import vistas.Monitor;
 
 public class LoginControl implements ActionListener {
 
-	private LoginModelo modelo;
+	private AccesoBD modelo;
 
 	private LoginVista vista;
 
 	public LoginControl(LoginVista vista) {
-		this.modelo = new LoginModelo();
+		this.modelo = new AccesoBD();
 
 		this.vista = vista;
 
@@ -43,12 +46,15 @@ public class LoginControl implements ActionListener {
 		case "Login exitoso":
 			JOptionPane.showMessageDialog(vista, "Login exitoso!");
 			vista.dispose();
-			modelo.cerrarConexion();
+
 
 			if (modelo.getTipo_usuario().equals("A")) {
 				new Alumno().setVisible(true);
 			} else {
-				new Monitor().setVisible(true);
+				ArrayList<Actividad> actividades = modelo.consultaActividades();
+				//pedir a la bbdd la lista de actividades
+				//pasársela a Monitor
+				new Monitor(actividades).setVisible(true);
 			}
 
 			break;
@@ -56,6 +62,8 @@ public class LoginControl implements ActionListener {
 		default:
 			JOptionPane.showMessageDialog(vista, "Error en la validación.");
 		}
+		
+		modelo.cerrarConexion();
 
 	}
 

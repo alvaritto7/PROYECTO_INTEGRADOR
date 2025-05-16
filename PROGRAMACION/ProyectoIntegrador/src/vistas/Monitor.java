@@ -1,14 +1,21 @@
 package vistas;
 
 import javax.swing.*;
+
+import Modelo.Actividad;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class Monitor extends JFrame {
     protected JPanel panelContenido;
     private JLabel lblTitulo;
+    private ArrayList<Actividad> actividades;
 
-    public Monitor() {
+    public Monitor(ArrayList<Actividad> actividades) {
+    	this.setActividades(actividades);
+    	
         setTitle("MONITOR");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
@@ -55,7 +62,7 @@ public class Monitor extends JFrame {
         add(panelContenido, BorderLayout.CENTER);
 
         // Vistas
-        JPanel vistaCrearActividades = new VistaListaActividadesMonitor(this);
+        JPanel vistaCrearActividades = new VistaListaActividadesMonitor(this, actividades);
         JPanel vistaMisInscripciones = new VistaListaActividades();
         JPanel vistaSalas = new VistaListaSalas();
         JPanel vistaDatosSala = new VistaDatosSala(this);
@@ -95,4 +102,23 @@ public class Monitor extends JFrame {
         cl.show(panelContenido, nombreVista);
         lblTitulo.setText(titulo);
     }
+
+	/**
+	 * @return the actividades
+	 */
+	public ArrayList<Actividad> getActividades() {
+		return actividades;
+	}
+
+	/**
+	 * @param actividades the actividades to set
+	 */
+	public void setActividades(ArrayList<Actividad> actividades) {
+		this.actividades = actividades;
+	}
+
+	public JPanel getPanelContenido() {
+		// TODO Auto-generated method stub
+		return panelContenido;
+	}
 }
