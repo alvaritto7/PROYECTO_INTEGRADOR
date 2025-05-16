@@ -6,8 +6,6 @@ import java.awt.BorderLayout;
 import java.util.List;
 
 import javax.swing.JLabel;
-// import javax.swing.JTable;
-// import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
@@ -24,7 +22,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class VistaListaActividadesMonitor extends JPanel {
-    // private JTable table;
     private JList<String> list;
     private JScrollPane scrollPane;
     private JLabel lblTitulo;
