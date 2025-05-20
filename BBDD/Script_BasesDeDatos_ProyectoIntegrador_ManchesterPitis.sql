@@ -1,3 +1,4 @@
+
 DROP TABLE if exists inscripciones;
 DROP TABLE if exists actividades;
 DROP TABLE if exists sala ;
@@ -7,9 +8,11 @@ DROP TABLE if exists usuario;
 CREATE TABLE usuario (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     nombre_usuario VARCHAR(100) NOT NULL UNIQUE,
-    contrasena VARCHAR(25) NOT NULL,
-    cicloEducativo ENUM('DAW', 'DAM', 'ASIR', 'A3D', 'TAFD', 'EI', 'CI') NOT NULL
+    password VARCHAR(25) NOT NULL,
+    cicloEducativo ENUM('DAW', 'DAM', 'ASIR', 'A3D', 'TAFD', 'EI', 'CI') NOT NULL,
+    tipo_usuario ENUM('monitor', 'alumno') NOT NULL DEFAULT 'alumno'
 );
+
 
 /*Tabla Salas.*/
 CREATE TABLE sala (
@@ -48,13 +51,14 @@ CREATE TABLE inscripciones (
 /*INSERTS*/
 
 -- Usuarios
-INSERT INTO usuario (nombre_usuario, contrasena, cicloEducativo) VALUES
-('Turrillo, Hugo', '00000', 'DAW'),
-('Valdes, Lucia', '00001', 'TAFD'),
-('Gutierrez, Marcos', '00002', 'TAFD'),
-('Ruiz, Ana', '00003', 'A3D'),
-('Martinez, Alvaro', '00004', 'EI'),
-('Corraliza, Adrian', '00005', 'CI');
+INSERT INTO usuario (nombre_usuario, password, cicloEducativo, tipo_usuario) VALUES
+('Hugochu', '00000', 'DAW', 'monitor'),
+('Lucia', '00001', 'TAFD', 'monitor'),
+('Marcos', '00002', 'TAFD', 'monitor'),
+('Ana', '00003', 'A3D', 'alumno'),
+('Alvaro', '00004', 'EI', 'alumno'),
+('Adrian', '00005', 'CI', 'alumno');
+
 
 -- Salas
 INSERT INTO sala (codigo_sala, tipo_sala, capacidad_sala, utilizacion, ocupacion) VALUES
@@ -83,4 +87,3 @@ INSERT INTO inscripciones (usuario_id, actividad_id) VALUES
 (6, 3),
 (1, 4),
 (5, 5);
-SELECT * FROM script_basesdedatos_proyectointegrador_manchesterpitis.usuario;
