@@ -3,6 +3,7 @@ package vistas;
 import Modelo.*;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -22,8 +23,8 @@ public class VistaListaActividadesAlumno extends JPanel {
     private JTable table;
     private JScrollPane scrollPane;
     private JLabel lblTitulo;
-    private JButton btnNuevo;
     private JButton btnBorrar;
+    private ArrayList<Actividad> actividades;
 
     public VistaListaActividadesAlumno() {
         GridBagLayout gridBagLayout = new GridBagLayout();
@@ -33,7 +34,7 @@ public class VistaListaActividadesAlumno extends JPanel {
         gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         setLayout(gridBagLayout);
                                         
-                                                lblTitulo = new JLabel("Lista de Actividades Alumno");
+                                                lblTitulo = new JLabel("Lista de Inscripciones Alumno");
                                                 lblTitulo.setMinimumSize(new Dimension(196, 60));
                                                 lblTitulo.setMaximumSize(new Dimension(196, 60));
                                                 lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 24));
@@ -54,15 +55,7 @@ public class VistaListaActividadesAlumno extends JPanel {
                                         gbc_scrollPane.fill = GridBagConstraints.BOTH;
                                         gbc_scrollPane.gridx = 2;
                                         gbc_scrollPane.gridy = 1;
-                                        add(scrollPane, gbc_scrollPane); 
-                                
-                                btnNuevo = new JButton("Nuevo");
-                                GridBagConstraints gbc_btnNuevo = new GridBagConstraints();
-                                gbc_btnNuevo.anchor = GridBagConstraints.EAST;
-                                gbc_btnNuevo.insets = new Insets(0, 0, 0, 5);
-                                gbc_btnNuevo.gridx = 3;
-                                gbc_btnNuevo.gridy = 7;
-                                add(btnNuevo, gbc_btnNuevo);
+                                        add(scrollPane, gbc_scrollPane);
                                 
                                 btnBorrar = new JButton("Borrar");
                                 GridBagConstraints gbc_btnBorrar = new GridBagConstraints();
@@ -71,37 +64,31 @@ public class VistaListaActividadesAlumno extends JPanel {
                                 gbc_btnBorrar.gridy = 7;
                                 add(btnBorrar, gbc_btnBorrar);
                                 
-                                
-                                
-                                String[] columnas = {"ID", "Nombre", "Fecha", "Hora", "Duracion","Plazas","Sala"};
-                                DefaultTableModel modelo = new DefaultTableModel(columnas, 0);                    
-                                table.setModel(modelo); 
-                                
-                                Object[][] datos = {
-                                	    {"1", "Voleybol", "2025-04-15", "10:00:00", "60", "20",   "V100"},
-                                	    {"2", "Futbol", "2025-04-16", "11:00:00", "60", "15",   "F505"},
-                                	    {"3", "Baloncesto", "2025-04-17", "09:00:00", "45", "10",   "B101"},
-                                	    {"4", "Natación", "2025-04-18", "12:00:00", "90", "25",   "P100"},
-                                	    {"5", "Baloncesto", "2025-04-19", "16:00:00", "90", "10",  "B502"},
-                                	    {"1", "Voleybol", "2025-04-15", "10:00:00", "60", "20",   "V100"},
-                                	    {"2", "Futbol", "2025-04-16", "11:00:00", "60", "15",   "F505"},
-                                	    {"3", "Baloncesto", "2025-04-17", "09:00:00", "45", "10",   "B101"},
-                                	    {"4", "Natación", "2025-04-18", "12:00:00", "90", "25",   "P100"},
-                                	    {"5", "Baloncesto", "2025-04-19", "16:00:00", "90", "10",  "B502"},
-                                	    {"1", "Voleybol", "2025-04-15", "10:00:00", "60", "20",   "V100"},
-                                	    {"2", "Futbol", "2025-04-16", "11:00:00", "60", "15",   "F505"},
-                                	    {"3", "Baloncesto", "2025-04-17", "09:00:00", "45", "10",   "B101"},
-                                	    {"4", "Natación", "2025-04-18", "12:00:00", "90", "25",   "P100"},
-                                	    {"5", "Baloncesto", "2025-04-19", "16:00:00", "90", "10",  "B502"}
-                                	};
-
-                                for (Object[] fila : datos) {
-                                    modelo.addRow(fila);
-                                }
-                         					
+                                			
 
     
     }
 
-  
+    public void setActividades(ArrayList<Actividad> listaActividades)
+	{
+		actividades = listaActividades;
+		
+		String[] columnas = { "ID", "Nombre", "Fecha", "Hora", "Duracion", "Plazas", "Sala" };
+		DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+		table.setModel(modelo);
+		
+		for(Actividad a : actividades)
+		{
+			modelo.addRow( new Object[] { a.getId(),
+						   a.getNombre(),
+						   a.getFecha(),
+						   a.getHora(),
+						   a.getDuracion(),
+						   a.getParticipantesMax(),
+						   a.getIdSala()});
+		}
+		
+		
+	}
+	
 }

@@ -13,7 +13,7 @@ public class VentanaLogin {
 	     LoginVista vista = new LoginVista();
 	     vista.hacerVisible(); 
 	     
-	     new LoginControl(vista);
+	     LoginControl control = new LoginControl(vista);
 		
 
 	}

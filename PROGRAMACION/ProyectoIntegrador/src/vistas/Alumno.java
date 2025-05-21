@@ -1,19 +1,27 @@
 package vistas;
 
 import javax.swing.*;
+
+import Controladores.AlumnoControl;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class Alumno extends JFrame {
+	
+	private JPanel panelActual;
     private JPanel panelContenido;
-    private JLabel lblTitulo;
+    private AlumnoControl control;
 
-    public Alumno() {
+    public Alumno(AlumnoControl controlador) {
+    	this.control = controlador;
+    	this.control.setVista(this);
+    	
       setTitle("ALUMNO");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
+        getContentPane().setLayout(new BorderLayout());
 
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
@@ -34,47 +42,43 @@ public class Alumno extends JFrame {
         mnDatosPersonales.add(mntmDatosPersonales);
 
         JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        lblTitulo = new JLabel("Mis Actividades");
-        lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 16));
-        panelSuperior.add(lblTitulo);
-        add(panelSuperior, BorderLayout.NORTH);
+        getContentPane().add(panelSuperior, BorderLayout.NORTH);
 
         panelContenido = new JPanel(new CardLayout());
-        add(panelContenido, BorderLayout.CENTER);
+        getContentPane().add(panelContenido, BorderLayout.CENTER);
 
-        //JPanel panelMisActividadesAlumno = new MisActividadesAlumno();
-        JPanel VistaListaActividades = new VistaListaActividades();
-       // JPanel panelActividadesDisponibles = new ActividadesDisponiblesAlumnos();
-        JPanel VistaListaActividadesAlumno = new VistaListaActividadesAlumno();
-        //JPanel panelDatosPersonales = new DatosPersonalesAlumno();
-        JPanel VistaDatosAlumno = new VistaDatosAlumno();
-        //panelContenido.add(panelMisActividadesAlumno, "misactividades");
-        panelContenido.add(VistaListaActividades, "misactividades");
-        panelContenido.add(VistaListaActividadesAlumno, "actividadesdisponibles");
-        panelContenido.add(VistaDatosAlumno, "datospersonales");
+        
+        mntmMisActividades.addActionListener(control );
+        mntmMisActividades.setActionCommand("MIS_ACTIVIDADES");
 
-        mntmMisActividades.addActionListener((ActionEvent e) -> {
-            //mostrarVista("misactividades", "Inscripciones");
-        	 mostrarVista("misactividades", " ");
-        });
+        mntmActividadesDisponibles.addActionListener(control);
+        mntmActividadesDisponibles.setActionCommand("ACTIVIDADES_DISPONIBLES");
 
-        mntmActividadesDisponibles.addActionListener((ActionEvent e) -> {
-           // mostrarVista("actividadesdisponibles", "Actividades Disponibles");
-        	 mostrarVista("actividadesdisponibles", " ");
-        });
+        mntmDatosPersonales.addActionListener(control);
+        mntmDatosPersonales.setActionCommand("DATOS_ALUMNO");
 
-        mntmDatosPersonales.addActionListener((ActionEvent e) -> {
-            mostrarVista("datospersonales", "Datos Personales");
-        });
-
-        mostrarVista("datospersonales", "Datos Personales");
+        
     }
 
-    private void mostrarVista(String nombreVista, String titulo) {
-        CardLayout cl = (CardLayout) (panelContenido.getLayout());
-        cl.show(panelContenido, nombreVista);
-        lblTitulo.setText(titulo);
-    }
+    
 
    
+    public void setPanel(JPanel nuevoPanel) {
+    	
+    	
+        if (panelActual != null) {
+        	panelContenido.remove(panelActual);
+        }
+
+        panelActual = nuevoPanel;
+        panelContenido.add(panelActual, BorderLayout.CENTER);
+
+        revalidate();  
+        repaint();    
+    }
+
+	
+    
+    
+    
 }

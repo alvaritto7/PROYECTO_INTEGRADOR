@@ -2,6 +2,8 @@ package vistas;
 
 import javax.swing.*;
 
+import Controladores.AlumnoControl;
+import Controladores.MonitorControl;
 import Modelo.Actividad;
 
 import java.awt.*;
@@ -9,12 +11,20 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class Monitor extends JFrame {
-    protected JPanel panelContenido;
+   
     private JLabel lblTitulo;
     private ArrayList<Actividad> actividades;
+    
+    private JPanel panelActual;
+    private JPanel panelContenido;
+    private MonitorControl control;
+    
+    
 
     public Monitor(ArrayList<Actividad> actividades) {
-    	this.setActividades(actividades);
+    	
+    	//this.control = control;
+    	//this.control.setVista(this);
     	
         setTitle("MONITOR");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -121,4 +131,22 @@ public class Monitor extends JFrame {
 		// TODO Auto-generated method stub
 		return panelContenido;
 	}
+	
+	 public void setPanel(JPanel nuevoPanel) {
+	    	
+	    	
+	        if (panelActual != null) {
+	        	panelContenido.remove(panelActual);
+	        }
+
+	        panelActual = nuevoPanel;
+	        panelContenido.add(panelActual, BorderLayout.CENTER);
+
+	        revalidate();  
+	        repaint();    
+	    }
+	
+	
+	
+	
 }
