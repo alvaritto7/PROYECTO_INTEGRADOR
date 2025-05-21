@@ -1,3 +1,4 @@
+
 package Modelo;
 
 import java.sql.*;
@@ -8,7 +9,8 @@ public class AccesoBD {
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String url = "jdbc:mysql://localhost/Script_BasesDeDatos_ProyectoIntegrador_ManchesterPitis";
 	private String usuario = "root";
-	private String password = "11111111";
+		
+	private String password = "111111";
 
 	private String tipo_usuario = "A";
 
