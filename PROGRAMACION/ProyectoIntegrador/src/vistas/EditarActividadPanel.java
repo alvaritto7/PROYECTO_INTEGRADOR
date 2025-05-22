@@ -27,11 +27,11 @@ public class EditarActividadPanel extends JPanel {
         add(nombre);
         
         add(new JLabel("Fecha:"));
-        fecha = new JTextField(actividad.getFecha());
+        fecha = new JTextField(actividad.getFecha().toString());
         add(fecha);
 
         add(new JLabel("Hora:"));
-        hora = new JTextField(actividad.getHora());
+        hora = new JTextField(actividad.getHora().toString());
         add(hora);
 
         

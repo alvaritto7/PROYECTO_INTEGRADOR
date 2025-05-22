@@ -1,7 +1,6 @@
 package Controladores;
 
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
@@ -13,72 +12,77 @@ import Modelo.AccesoBD;
 import vistas.Alumno;
 import vistas.LoginVista;
 import vistas.Monitor;
-import Controladores.*;
 import Main.Sesion;
 
+/**
+ * Controlador para gestionar el login de usuarios.
+ * Escucha los eventos de la vista de login y valida las credenciales.
+ */
 public class LoginControl implements ActionListener {
 
-	private AccesoBD modelo;
+    private AccesoBD modelo;
 
-	private LoginVista vista;
+    private LoginVista vista;
 
-	public LoginControl(LoginVista vista) {
-		this.modelo = new AccesoBD();
+    /**
+     * Constructor que recibe la vista de login y crea el modelo de acceso a base de datos.
+     * 
+     * @param vista la ventana de login que controla
+     */
+    public LoginControl(LoginVista vista) {
+        this.modelo = new AccesoBD();
+        this.vista = vista;
+    }
 
-		this.vista = vista;
+    /**
+     * Metodo que se ejecuta cuando se realiza una accion en la vista.
+     * Valida el usuario y password, y abre la ventana correspondiente segun el tipo de usuario.
+     * 
+     * @param e evento de accion (como presionar el boton de login)
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String usuario = vista.getUsuario();
+        String password = vista.getPassword();
 
-	}
+        String resultado = modelo.validarUsuario(usuario, password);
+        System.out.println("---> "+resultado);
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		String usuario = vista.getUsuario();
-		String password = vista.getPassword();
+        switch (resultado) {
+            case "Usuario no existe":
+                JOptionPane.showMessageDialog(vista, "El usuario introducido no existe en la base de datos.");
+                break;
 
-		String resultado = modelo.validarUsuario(usuario, password);
-		System.out.println("---> "+resultado);
+            case "Contraseña incorrecta":
+                JOptionPane.showMessageDialog(vista, "Contraseña Incorrecta, porfavor vuelva a intentarlo.");
+                break;
 
-		switch (resultado) {
-		case "Usuario no existe":
-			JOptionPane.showMessageDialog(vista, "El usuario introducido no existe en la base de datos.");
-			break;
+            case "Login exitoso":
+                JOptionPane.showMessageDialog(vista, "Login exitoso!");
+                vista.dispose();
+                Usuario usuarioLogin = modelo.getUsuarioPorNombre(usuario);
+                Sesion.setUsuarioLogado(usuarioLogin);
 
-		case "Contraseña incorrecta":
-			JOptionPane.showMessageDialog(vista, "Contraseña Incorrecta, porfavor vuelva a intentarlo.");
+                if (modelo.getTipo_usuario().equals("A")) {
+                    AlumnoControl alumnoControl = new AlumnoControl();
+                    Alumno alumnoVista = new Alumno(alumnoControl);
+                    alumnoVista.setVisible(true);
+                } else {
+                    ArrayList<Actividad> actividades = modelo.consultaActividades();
+                    // pedir a la bbdd la lista de actividades
+                    // pasarsela a Monitor
+                    MonitorControl control = new MonitorControl();
+                    Monitor monitor = new Monitor(actividades);
 
-			break;
+                    monitor.setActividades(actividades);
+                    monitor.setVisible(true);
+                }
+                break;
 
-		case "Login exitoso":
-			JOptionPane.showMessageDialog(vista, "Login exitoso!");
-			vista.dispose();
-			Usuario usuarioLogin = modelo.getUsuarioPorNombre(usuario);
-			Sesion.setUsuarioLogado(usuarioLogin);
+            default:
+                JOptionPane.showMessageDialog(vista, "Error en la validacion.");
+        }
 
-			if (modelo.getTipo_usuario().equals("A")) {
-				AlumnoControl alumnoControl = new AlumnoControl();
-				Alumno alumnoVista = new Alumno(alumnoControl);
-				alumnoVista.setVisible(true);
-				
-			} else {
-				ArrayList<Actividad> actividades = modelo.consultaActividades();
-				//pedir a la bbdd la lista de actividades
-				//pasársela a Monitor
-				MonitorControl control = new MonitorControl();
-				Monitor monitor = new Monitor(actividades);
-				
-				monitor.setActividades(actividades);
-				
-				monitor.setActividades(actividades);
-				monitor.setVisible(true);
-			}
-
-			break;
-
-		default:
-			JOptionPane.showMessageDialog(vista, "Error en la validación.");
-		}
-		
-		//modelo.cerrarConexion();
-
-	}
-
+        //modelo.cerrarConexion();
+    }
 }

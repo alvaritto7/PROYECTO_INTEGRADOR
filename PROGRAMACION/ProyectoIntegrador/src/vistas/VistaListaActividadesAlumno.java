@@ -9,6 +9,10 @@ import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+
+import Controladores.AlumnoControl;
+
 import javax.swing.JScrollPane;
 import java.awt.Font;
 import java.awt.Dimension;
@@ -25,8 +29,11 @@ public class VistaListaActividadesAlumno extends JPanel {
     private JLabel lblTitulo;
     private JButton btnBorrar;
     private ArrayList<Actividad> actividades;
+    private AlumnoControl controlador;
 
-    public VistaListaActividadesAlumno() {
+    public VistaListaActividadesAlumno(AlumnoControl control) {
+    	controlador = control;
+    	
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{37, 48, 242, 188, 105, 16, 0};
         gridBagLayout.rowHeights = new int[]{85, 0, 20, 101, 50, 20, 0, 29, 0};
@@ -58,6 +65,8 @@ public class VistaListaActividadesAlumno extends JPanel {
                                         add(scrollPane, gbc_scrollPane);
                                 
                                 btnBorrar = new JButton("Borrar");
+                                btnBorrar.addActionListener(control);
+                                btnBorrar.setActionCommand("BORRAR_INSCRIPCION");
                                 GridBagConstraints gbc_btnBorrar = new GridBagConstraints();
                                 gbc_btnBorrar.insets = new Insets(0, 0, 0, 5);
                                 gbc_btnBorrar.gridx = 4;
@@ -73,7 +82,7 @@ public class VistaListaActividadesAlumno extends JPanel {
 	{
 		actividades = listaActividades;
 		
-		String[] columnas = { "ID", "Nombre", "Fecha", "Hora", "Duracion", "Plazas", "Sala" };
+		String[] columnas = { "ID", "Nombre", "Fecha", "Hora", "Duracion", "Plazas", "Sala", "Monitor" };
 		DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
 		table.setModel(modelo);
 		
@@ -85,10 +94,23 @@ public class VistaListaActividadesAlumno extends JPanel {
 						   a.getHora(),
 						   a.getDuracion(),
 						   a.getParticipantesMax(),
-						   a.getIdSala()});
+						   a.getSala().getCodigoSala(),
+						   a.getMonitor().getNombreUsuario()});
 		}
 		
 		
 	}
 	
+    
+    public Integer getActividadSelecionada()
+    {
+    	Integer id_actividad;
+    	id_actividad = Integer.parseInt( table.getValueAt(table.getSelectedRow(), 0).toString());
+    	
+    	return id_actividad;
+    }
+    
+    
+    
+    
 }

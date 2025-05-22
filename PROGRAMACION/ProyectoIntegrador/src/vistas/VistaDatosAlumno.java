@@ -8,7 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
- 
+import Controladores.AlumnoControl;
 
 import java.awt.Insets;
 import javax.swing.JPasswordField;
@@ -25,8 +25,18 @@ public class VistaDatosAlumno extends JPanel {
 	private JLabel lblNewLabel_8;
 	private JLabel lblNewLabel_1;
 	private JTextField txtTipoUsuario;
+	private AlumnoControl controlador;
 	
-	public VistaDatosAlumno() {
+	/**
+	 * Constructor de la clase VistaDatosAlumno.
+	 * Recibe un controlador para manejar los eventos del boton.
+	 * Configura el layout y agrega los componentes al panel.
+	 * @param control controlador que maneja eventos del alumno
+	 */
+	public VistaDatosAlumno(AlumnoControl control) {
+		
+		this.controlador = control;
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 160, 0, 114, 49, 20};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10};
@@ -57,7 +67,8 @@ public class VistaDatosAlumno extends JPanel {
 		add(lblNewLabel_7, gbc_lblNewLabel_7);
 		
 		txtUsuarioId = new JTextField();
-		txtUsuarioId.setText(" ");
+		txtUsuarioId.setEnabled(false);
+		txtUsuarioId.setText("");
 		GridBagConstraints gbc_txtUsuarioId = new GridBagConstraints();
 		gbc_txtUsuarioId.gridwidth = 2;
 		gbc_txtUsuarioId.insets = new Insets(0, 0, 5, 5);
@@ -144,6 +155,8 @@ public class VistaDatosAlumno extends JPanel {
 		add(txtPass, gbc_txtPass);
 		
 		btnGuardar = new JButton("Guardar");
+		btnGuardar.addActionListener(control);
+		btnGuardar.setActionCommand("GUARDAR_DATOS_PERSONALES");
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnGuardar.gridx = 6;
@@ -153,7 +166,10 @@ public class VistaDatosAlumno extends JPanel {
 		
 	}
 
-	
+	/**
+	 * Actualiza los campos con los datos del alumno recibido.
+	 * @param alumno objeto Usuario con los datos del alumno
+	 */
 	public void setDatosAlumno(Usuario alumno)
 	{
 		txtNombre.setText(alumno.getNombreUsuario());
@@ -164,8 +180,45 @@ public class VistaDatosAlumno extends JPanel {
 		
 	}
 	
- 
+	/**
+	 * Obtiene el nombre que ingreso el usuario en el campo correspondiente.
+	 * @return nombre del alumno
+	 */
+	public String getNombre() {
+		return txtNombre.getText();
+	}
 	
+	/**
+	 * Obtiene el ciclo educativo que ingreso el usuario en el campo correspondiente.
+	 * @return ciclo educativo del alumno
+	 */
+	public String getCicloEducativo() {
+		return txtCiclo.getText();
+	}
+	
+	/**
+	 * Obtiene el id del usuario desde el campo correspondiente.
+	 * @return id del usuario en formato Integer
+	 */
+	public Integer getIdUsuario() {
+		return Integer.parseInt( txtUsuarioId.getText());
+	}
+	
+	/**
+	 * Obtiene la contraseña que ingreso el usuario.
+	 * @return contraseña en formato String
+	 */
+	public String getPassword() {
+		return new String(txtPass.getPassword());
+	}
+	
+	/**
+	 * Obtiene el tipo de usuario que ingreso el usuario en el campo correspondiente.
+	 * @return tipo de usuario
+	 */
+	public String getTipoUsuario() {
+		return txtTipoUsuario.getText();
+	}
   
 	
 }

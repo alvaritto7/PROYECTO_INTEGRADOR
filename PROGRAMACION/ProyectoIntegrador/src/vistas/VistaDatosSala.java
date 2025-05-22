@@ -8,7 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
- 
+import Controladores.MonitorControl;
 
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -30,7 +30,10 @@ public class VistaDatosSala extends JPanel {
 	private JLabel lblNewLabel_7;
 	private JLabel lblNewLabel_8;
 	
-	public VistaDatosSala(JFrame vista) {
+	public VistaDatosSala(MonitorControl control) {
+		
+		
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 74, 160, 0, 57, 49, 20};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10};
@@ -164,9 +167,7 @@ public class VistaDatosSala extends JPanel {
 		gbc_btnBorrar.gridy = 9;
 		add(btnBorrar, gbc_btnBorrar);
 		
-		 btnNuevo.addActionListener((ActionEvent e) -> {
-	            ((Monitor)vista).mostrarVista("datossala", "Datos Sala");
-	        });
+		 btnNuevo.addActionListener(control);
 	}
 
 	

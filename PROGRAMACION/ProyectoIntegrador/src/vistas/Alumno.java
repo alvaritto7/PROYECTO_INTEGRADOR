@@ -7,17 +7,27 @@ import Controladores.AlumnoControl;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class Alumno extends JFrame {
+/**
+ * Clase que representa la ventana principal para el alumno.
+ * Gestiona el menu y muestra los paneles segun la opcion elegida.
+ */
+public class Alumno extends JFrame  {
 	
 	private JPanel panelActual;
     private JPanel panelContenido;
     private AlumnoControl control;
 
+    /**
+     * Constructor que recibe el controlador para manejar eventos.
+     * Configura la ventana y crea el menu con sus opciones.
+     * 
+     * @param controlador controlador que maneja las acciones de los menus
+     */
     public Alumno(AlumnoControl controlador) {
     	this.control = controlador;
     	this.control.setVista(this);
     	
-      setTitle("ALUMNO");
+        setTitle("ALUMNO");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
@@ -47,8 +57,8 @@ public class Alumno extends JFrame {
         panelContenido = new JPanel(new CardLayout());
         getContentPane().add(panelContenido, BorderLayout.CENTER);
 
-        
-        mntmMisActividades.addActionListener(control );
+        // Asignar el controlador y comando a cada opcion del menu
+        mntmMisActividades.addActionListener(control);
         mntmMisActividades.setActionCommand("MIS_ACTIVIDADES");
 
         mntmActividadesDisponibles.addActionListener(control);
@@ -56,29 +66,31 @@ public class Alumno extends JFrame {
 
         mntmDatosPersonales.addActionListener(control);
         mntmDatosPersonales.setActionCommand("DATOS_ALUMNO");
-
-        
     }
 
-    
+    /**
+     * Obtiene el panel que se esta mostrando actualmente.
+     * 
+     * @return el panel actual
+     */
+    public JPanel getPanel() {    	
+        return panelActual;
+    }
 
-   
+    /**
+     * Cambia el panel que se muestra en el area de contenido.
+     * Remueve el panel anterior y añade el nuevo.
+     * 
+     * @param nuevoPanel panel que se quiere mostrar
+     */
     public void setPanel(JPanel nuevoPanel) {
-    	
-    	
         if (panelActual != null) {
         	panelContenido.remove(panelActual);
         }
-
         panelActual = nuevoPanel;
         panelContenido.add(panelActual, BorderLayout.CENTER);
 
         revalidate();  
         repaint();    
     }
-
-	
-    
-    
-    
 }
