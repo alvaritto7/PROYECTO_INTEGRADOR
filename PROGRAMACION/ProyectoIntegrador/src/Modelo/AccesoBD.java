@@ -17,7 +17,8 @@ public class AccesoBD {
 
 	/**
 	 * Constructor. Intenta establecer conexión con la base de datos.
-	 */
+	 * Muestra un mensaje de error en consola si ocurre algún problema durante la conexión.
+     */
 	public AccesoBD() {
 		try {
 			conexion = DriverManager.getConnection(url, usuario, password);
@@ -30,7 +31,7 @@ public class AccesoBD {
 	/**
 	 * Valida el usuario y la contraseña introducidos.
 	 * 
-	 * @param usuario Nombre del usuario.
+	 * @param usuario es el codigo de matrículo.
 	 * @param password Contraseña del usuario.
 	 * @return Mensaje indicando si el inicio de sesión fue exitoso o el tipo de error.
 	 */
@@ -231,6 +232,12 @@ public class AccesoBD {
 
 		return actividades;
 	}
+	   /**
+     * Guarda una nueva actividad o actualiza una existente en la base de datos.
+     *
+     * @param a Objeto Actividad a guardar o actualizar.
+     * @return Objeto Actividad con el ID actualizado si fue insertada.
+     */
 
 	public Actividad guardarActividad(Actividad a) {
 	    String sql;
@@ -414,7 +421,12 @@ public class AccesoBD {
 
 		return usuario;
 	}
-
+	 /**
+     * Recupera un usuario según su matrícula.
+     *
+     * @param matricula Matrícula del usuario.
+     * @return Objeto Usuario con los datos correspondientes.
+     */
 	
 	public Usuario getUsuarioPorMatricula(String matricula) {
 		String consultaUsuario = "SELECT id_usuario, nombre_usuario, password ,cicloEducativo, apellidos_usuario, email, matricula FROM usuario WHERE matricula = ?";
@@ -477,7 +489,7 @@ public class AccesoBD {
 	}
 
 	/**
-	 * Elimina una inscripción de un usuario a una actividad.
+	 * Elimina una inscripción de un usuario a una actividad a la que se  ha apuntado o inscripto.
 	 * 
 	 * @param id_usuario ID del usuario.
 	 * @param id_actividad ID de la actividad.
@@ -538,6 +550,12 @@ public class AccesoBD {
 		return id_inscripcion;
 	}
 	
+	  /**
+     * Elimina una actividad existente en la base de datos.
+     *
+     * @param id_actividad ID de la actividad a eliminar.
+     * @return Número de filas afectadas (0 si no se eliminó).
+     */
 	
 	public Integer BorrarActividad(int id_actividad)
 	 {
@@ -559,6 +577,13 @@ public class AccesoBD {
 	        return filas;
 		 
 	 }
+	
+	 /**
+     * Elimina una sala registrada en la base de datos.
+     *
+     * @param id_sala ID de la sala a eliminar.
+     * @return Número de filas afectadas.
+     */
 	
 	
 	public Integer BorrarSala(int id_sala)
@@ -582,7 +607,11 @@ public class AccesoBD {
 		 
 	 }
 	
-	
+	 /**
+     * Devuelve una lista con todas las salas registradas.
+     *
+     * @return Lista de objetos Sala.
+     */
 	 public ArrayList<Sala> getListaSalas()
 	    {
 		    ArrayList<Sala> listaSalas = new ArrayList<>();
@@ -628,8 +657,18 @@ public class AccesoBD {
 	    	
 	    }
 	    
+	 /**
+	  * Inserta o actualiza una sala en la base de datos.
+	  * <p>
+	  * Si la sala tiene un ID igual a 0, se insertará como una nueva sala.
+	  * En caso contrario, se actualizará la sala existente con ese ID.
+	  * </p>
+	  *
+	  * @param sala Objeto {@link Sala} que contiene la información de la sala a guardar o actualizar.
+	  * @return El ID generado de la sala si fue insertada, o 0 si fue una actualización o si ocurrió un error.
+	  */
 	
-	 
+ 
 	 public Integer GuardarSala(Sala sala) {
 	       
 	        String sql;

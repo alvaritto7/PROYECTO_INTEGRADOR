@@ -1,119 +1,193 @@
 package Modelo;
 
+/**
+ * Representa un usuario del sistema, con información personal y de acceso.
+ */
+public class Usuario {
 
-	public class Usuario {
+    /** Identificador único del usuario */
+    private Integer idUsuario;
 
-	    private Integer idUsuario;
-	    private String matricula;
-	    private String nombreUsuario;
-	    private String apellidosUsuario;
-	    private String email;
-	    private String contrasena;
-	    private String cicloEducativo;
-	    private String password; // Campo duplicado en nombre con "contrasena", pero lo incluyo tal cual en la tabla
-	    private String tipoUsuario;
+    /** Matrícula o código del usuario */
+    private String matricula;
 
-	   
+    /** Nombre del usuario */
+    private String nombreUsuario;
 
-	    // Constructor vacío
-	    public Usuario() {
-	    }
+    /** Apellidos del usuario */
+    private String apellidosUsuario;
 
-	    
+    /** Correo electrónico del usuario */
+    private String email;
 
-	    public Usuario(Integer idUsuario, String matricula, String nombreUsuario, String apellidosUsuario, String email,
-				String contrasena, String cicloEducativo, String password, String tipoUsuario) {
-			super();
-			this.idUsuario = idUsuario;
-			this.matricula = matricula;
-			this.nombreUsuario = nombreUsuario;
-			this.apellidosUsuario = apellidosUsuario;
-			this.email = email;
-			this.contrasena = contrasena;
-			this.cicloEducativo = cicloEducativo;
-			this.password = password;
-			this.tipoUsuario = tipoUsuario;
-		}
+    /** Contraseña del usuario (campo 1) */
+    private String contrasena;
 
+    /** Ciclo educativo al que pertenece el usuario */
+    private String cicloEducativo;
 
+    /** Contraseña del usuario (campo 2, duplicado del anterior) */
+    private String password;
 
-		// Getters y Setters
-	    public Integer getIdUsuario() {
-	        return idUsuario;
-	    }
+    /** Tipo de usuario (por ejemplo, administrador, estudiante, etc.) */
+    private String tipoUsuario;
 
-	    public void setIdUsuario(Integer idUsuario) {
-	        this.idUsuario = idUsuario;
-	    }
+    /**
+     * Constructor por defecto.
+     */
+    public Usuario() {
+    }
 
-	    public String getNombreUsuario() {
-	        return nombreUsuario;
-	    }
+    /**
+     * Constructor con todos los atributos.
+     * 
+     * @param idUsuario       Identificador del usuario
+     * @param matricula       Matrícula del usuario
+     * @param nombreUsuario   Nombre del usuario
+     * @param apellidosUsuario Apellidos del usuario
+     * @param email           Correo electrónico
+     * @param contrasena      Contraseña (campo 1)
+     * @param cicloEducativo  Ciclo educativo
+     * @param password        Contraseña (campo 2, duplicado)
+     * @param tipoUsuario     Tipo de usuario
+     */
+    public Usuario(Integer idUsuario, String matricula, String nombreUsuario, String apellidosUsuario, String email,
+                   String contrasena, String cicloEducativo, String password, String tipoUsuario) {
+        super();
+        this.idUsuario = idUsuario;
+        this.matricula = matricula;
+        this.nombreUsuario = nombreUsuario;
+        this.apellidosUsuario = apellidosUsuario;
+        this.email = email;
+        this.contrasena = contrasena;
+        this.cicloEducativo = cicloEducativo;
+        this.password = password;
+        this.tipoUsuario = tipoUsuario;
+    }
 
-	    public void setNombreUsuario(String nombreUsuario) {
-	        this.nombreUsuario = nombreUsuario;
-	    }
+    /**
+     * @return Identificador del usuario
+     */
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
 
-	    public String getContrasena() {
-	        return contrasena;
-	    }
+    /**
+     * @param idUsuario Establece el identificador del usuario
+     */
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 
-	    public void setContrasena(String contrasena) {
-	        this.contrasena = contrasena;
-	    }
+    /**
+     * @return Nombre del usuario
+     */
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
 
-	    public String getCicloEducativo() {
-	        return cicloEducativo;
-	    }
+    /**
+     * @param nombreUsuario Establece el nombre del usuario
+     */
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
 
-	    public void setCicloEducativo(String cicloEducativo) {
-	        this.cicloEducativo = cicloEducativo;
-	    }
+    /**
+     * @return Contraseña del usuario (campo 1)
+     */
+    public String getContrasena() {
+        return contrasena;
+    }
 
-	    public String getPassword() {
-	        return password;
-	    }
+    /**
+     * @param contrasena Establece la contraseña (campo 1)
+     */
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
 
-	    public void setPassword(String password) {
-	        this.password = password;
-	    }
+    /**
+     * @return Ciclo educativo del usuario
+     */
+    public String getCicloEducativo() {
+        return cicloEducativo;
+    }
 
-	    public String getTipoUsuario() {
-	        return tipoUsuario;
-	    }
+    /**
+     * @param cicloEducativo Establece el ciclo educativo
+     */
+    public void setCicloEducativo(String cicloEducativo) {
+        this.cicloEducativo = cicloEducativo;
+    }
 
-	    public void setTipoUsuario(String tipoUsuario) {
-	        this.tipoUsuario = tipoUsuario;
-	    }
+    /**
+     * @return Contraseña del usuario (campo 2)
+     */
+    public String getPassword() {
+        return password;
+    }
 
-		public String getMatricula() {
-			return matricula;
-		}
+    /**
+     * @param password Establece la contraseña (campo 2)
+     */
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-		public void setMatricula(String matricula) {
-			this.matricula = matricula;
-		}
+    /**
+     * @return Tipo de usuario
+     */
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
 
-		public String getApellidosUsuario() {
-			return apellidosUsuario;
-		}
+    /**
+     * @param tipoUsuario Establece el tipo de usuario
+     */
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
 
-		public void setApellidosUsuario(String apellidosUsuario) {
-			this.apellidosUsuario = apellidosUsuario;
-		}
+    /**
+     * @return Matrícula del usuario
+     */
+    public String getMatricula() {
+        return matricula;
+    }
 
-		public String getEmail() {
-			return email;
-		}
+    /**
+     * @param matricula Establece la matrícula
+     */
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
 
-		public void setEmail(String email) {
-			this.email = email;
-		}
+    /**
+     * @return Apellidos del usuario
+     */
+    public String getApellidosUsuario() {
+        return apellidosUsuario;
+    }
 
-	   
-	    
-	    
-	}
+    /**
+     * @param apellidosUsuario Establece los apellidos del usuario
+     */
+    public void setApellidosUsuario(String apellidosUsuario) {
+        this.apellidosUsuario = apellidosUsuario;
+    }
 
-	
+    /**
+     * @return Correo electrónico del usuario
+     */
+    public String getEmail() {
+        return email;
+    }
 
+    /**
+     * @param email Establece el correo electrónico
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+}

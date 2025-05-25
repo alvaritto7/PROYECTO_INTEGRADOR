@@ -143,7 +143,7 @@ public class AlumnoControl implements ActionListener {
      */
     private void MostrarDatosPersonales() {
         VistaDatosAlumno panelDatosAlumno = new VistaDatosAlumno(this);
-        Usuario datosAlumno = Sesion.getUsuarioLogado();
+        Usuario datosAlumno =  accesobd.getUsuarioById(Sesion.getUsuarioLogado().getIdUsuario());
         panelDatosAlumno.setDatosAlumno(datosAlumno);             
         vista.setPanel(panelDatosAlumno);           
     }
@@ -169,8 +169,7 @@ public class AlumnoControl implements ActionListener {
      */
     private void GuardarDatosPersonales() {
         VistaDatosAlumno panelDatosAlumno = (VistaDatosAlumno)vista.getPanel();
-        Usuario datosAlumno = panelDatosAlumno.getDatosAlumno();        
-        accesobd.GuardarDatosPersonales(datosAlumno);
+        Usuario datosAlumno = panelDatosAlumno.getDatosAlumno(); 
         JOptionPane.showMessageDialog(vista, "Datos guardados correctamente.");
     }
 }
