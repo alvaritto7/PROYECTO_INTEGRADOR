@@ -131,7 +131,7 @@ public class AlumnoControl implements ActionListener {
         //VistaListaActividadesAlumno misActividades = new VistaListaActividadesAlumno(this);
         VistaListaActividadesA misActividades = new VistaListaActividadesA(this);
         ArrayList<Actividad> activ = accesobd.consultaActividadesAlumno(Sesion.getUsuarioLogado().getIdUsuario());
-        misActividades.setTitulo("Inscripciones");
+        misActividades.setTitulo("Mis Actividades / Inscripciones");
         misActividades.MostrarBotonInscripcion("N");
         misActividades.MostrarBotonBorrar("S");
         misActividades.setActividades(activ);  
@@ -169,13 +169,7 @@ public class AlumnoControl implements ActionListener {
      */
     private void GuardarDatosPersonales() {
         VistaDatosAlumno panelDatosAlumno = (VistaDatosAlumno)vista.getPanel();
-        Usuario datosAlumno = new Usuario();
-        datosAlumno.setNombreUsuario(panelDatosAlumno.getNombre());
-        datosAlumno.setIdUsuario(panelDatosAlumno.getIdUsuario());
-        datosAlumno.setCicloEducativo(panelDatosAlumno.getCicloEducativo());
-        datosAlumno.setPassword(panelDatosAlumno.getPassword());
-        datosAlumno.setTipoUsuario(panelDatosAlumno.getTipoUsuario());
-        
+        Usuario datosAlumno = panelDatosAlumno.getDatosAlumno();        
         accesobd.GuardarDatosPersonales(datosAlumno);
         JOptionPane.showMessageDialog(vista, "Datos guardados correctamente.");
     }

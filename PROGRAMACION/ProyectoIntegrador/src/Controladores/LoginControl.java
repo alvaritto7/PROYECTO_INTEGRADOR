@@ -60,23 +60,56 @@ public class LoginControl implements ActionListener {
             case "Login exitoso":
                 JOptionPane.showMessageDialog(vista, "Login exitoso!");
                 vista.dispose();
-                Usuario usuarioLogin = modelo.getUsuarioPorNombre(usuario);
+                Usuario usuarioLogin = modelo.getUsuarioPorMatricula(usuario);
                 Sesion.setUsuarioLogado(usuarioLogin);
-
-                if (modelo.getTipo_usuario().equals("A")) {
-                    AlumnoControl alumnoControl = new AlumnoControl();
-                    Alumno alumnoVista = new Alumno(alumnoControl);
-                    alumnoVista.setVisible(true);
-                } else {
-                    ArrayList<Actividad> actividades = modelo.consultaActividades();
-                    // pedir a la bbdd la lista de actividades
-                    // pasarsela a Monitor
-                    MonitorControl control = new MonitorControl();
-                    Monitor monitor = new Monitor(actividades);
-
-                    monitor.setActividades(actividades);
-                    monitor.setVisible(true);
+                
+                int seleccion = 0;
+                
+                if (modelo.getTipo_usuario().equals("M")) {
+                
+	                Object[] opciones = {"Alumno", "Monitor"};
+	               
+	                seleccion = JOptionPane.showOptionDialog(null,"Por favor, selecciona el modo en el que deseas acceder al programa.", 
+	                    "Tipo de Acceso al programa", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,null,opciones,opciones[0] 
+	                );
                 }
+                
+                
+                if(seleccion == 0)
+                {
+                	 AlumnoControl alumnoControl = new AlumnoControl();
+                     Alumno alumnoVista = new Alumno(alumnoControl);
+                     alumnoVista.setVisible(true);
+                }
+                else
+                {
+                	 ArrayList<Actividad> actividades = modelo.consultaActividades();
+                     // pedir a la bbdd la lista de actividades
+                     // pasarsela a Monitor
+                     MonitorControl control = new MonitorControl();
+                     Monitor monitor = new Monitor(control);
+                     //monitor.setActividades(actividades);
+                     monitor.setVisible(true);
+                }
+                
+                
+//
+//                if (modelo.getTipo_usuario().equals("A")) {
+//                    AlumnoControl alumnoControl = new AlumnoControl();
+//                    Alumno alumnoVista = new Alumno(alumnoControl);
+//                    alumnoVista.setVisible(true);
+//                } else {
+//                    ArrayList<Actividad> actividades = modelo.consultaActividades();
+//                    // pedir a la bbdd la lista de actividades
+//                    // pasarsela a Monitor
+//                    MonitorControl control = new MonitorControl();
+//                    Monitor monitor = new Monitor(control);
+//                    //monitor.setActividades(actividades);
+//                    monitor.setVisible(true);
+//                }
+//                
+                
+                
                 break;
 
             default:

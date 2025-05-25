@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import Controladores.AlumnoControl;
 import Controladores.MonitorControl;
+import Main.Sesion;
 import Modelo.Actividad;
 
 import java.awt.*;
@@ -17,11 +18,13 @@ import java.util.ArrayList;
 public class Monitor extends JFrame {
    
     private JLabel lblTitulo;
-    private ArrayList<Actividad> actividades;
+    
     
     private JPanel panelActual;
     private JPanel panelContenido;
     private MonitorControl control;
+    
+   
     
     /**
      * Constructor que crea la ventana con el menu y las vistas iniciales.
@@ -29,29 +32,31 @@ public class Monitor extends JFrame {
      * 
      * @param actividades lista de actividades para mostrar en la vista
      */
-    public Monitor(ArrayList<Actividad> actividades) {
+    //public Monitor(ArrayList<Actividad> actividades) 
+    public Monitor(MonitorControl controlador) 
+    {
     	
-    	//this.control = control;
-    	//this.control.setVista(this);
+    	this.control = controlador;
+    	this.control.setVista(this);
     	
-        setTitle("MONITOR");
+        setTitle("MONITOR " + Sesion.getUsuarioLogado().getNombreUsuario() + " " + Sesion.getUsuarioLogado().getApellidosUsuario());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
+        getContentPane().setLayout(new BorderLayout());
 
         // Barra de menu
         JMenuBar menuBar = new JMenuBar();
         setJMenuBar(menuBar);
 
         // Menu Actividades
-        JMenu mnActividades = new JMenu("Ver todas las Actividades");
+        JMenu mnActividades = new JMenu("Actividades");
         menuBar.add(mnActividades);
 
-        JMenuItem mntmCrearActividades = new JMenuItem("Nueva actividad");
+        JMenuItem mntmCrearActividades = new JMenuItem("Actividades Disponibles");
         mnActividades.add(mntmCrearActividades);
 
-        JMenuItem mntmMisInscripciones = new JMenuItem("Mis Inscripciones");
+        JMenuItem mntmMisInscripciones = new JMenuItem("Mis Actividades");
         mnActividades.add(mntmMisInscripciones);
 
         // Menu Salas
@@ -59,6 +64,9 @@ public class Monitor extends JFrame {
         menuBar.add(mnSalas);
 
         JMenuItem mntmVerSalas = new JMenuItem("Ver Salas");
+        mntmVerSalas.addActionListener(control);
+        mntmVerSalas.setActionCommand("VER_SALAS");
+        
         mnSalas.add(mntmVerSalas);
 
         // Menu Datos Personales
@@ -70,80 +78,37 @@ public class Monitor extends JFrame {
 
         // Panel superior con titulo
         JPanel panelSuperior = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        lblTitulo = new JLabel("Mis Actividades");
+        lblTitulo = new JLabel("");
         lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 16));
         panelSuperior.add(lblTitulo);
-        add(panelSuperior, BorderLayout.NORTH);
+        getContentPane().add(panelSuperior, BorderLayout.NORTH);
 
         // Panel de contenido con CardLayout para cambiar vistas
         panelContenido = new JPanel(new CardLayout());
-        add(panelContenido, BorderLayout.CENTER);
+        getContentPane().add(panelContenido, BorderLayout.CENTER);
 
-        // Vistas que se podran mostrar en el panel contenido
-        JPanel vistaCrearActividades = new VistaListaActividadesMonitor(this, actividades);
-        JPanel vistaMisInscripciones = new VistaListaActividades();
-        JPanel vistaSalas = new VistaListaSalas();
-        JPanel vistaDatosSala = new VistaDatosSala(this.control);
-        //JPanel vistaDatosPersonales = new VistaDatosAlumno(this.control);
-
-        // Se añaden las vistas con un nombre para identificarlas
-        panelContenido.add(vistaCrearActividades, "crearActividades");
-        panelContenido.add(vistaMisInscripciones, "misInscripciones");
-        panelContenido.add(vistaSalas, "salas");
-        //panelContenido.add(vistaDatosPersonales, "datospersonales");
-        panelContenido.add(vistaDatosSala, "datossala");
+        // Vistas que se podran mostrar en el panel contenido        
+        //JPanel vistaCrearActividades = new VistaListaActividadesMonitor(this, actividades);
+        
+        
          
         // Listeners para cambiar la vista segun opcion del menu
-        mntmCrearActividades.addActionListener((ActionEvent e) -> {
-            mostrarVista("crearActividades", "Crear Actividades");
-        });
+        mntmCrearActividades.addActionListener(control);
+        mntmCrearActividades.setActionCommand("ACTIVIDADES_DISPONIBLES");
 
-        mntmMisInscripciones.addActionListener((ActionEvent e) -> {
-            mostrarVista("misInscripciones", "Mis Inscripciones");
-        });
+        mntmMisInscripciones.addActionListener(control);
+        mntmMisInscripciones.setActionCommand("MIS_ACTIVIDADES");
 
-        mntmVerSalas.addActionListener((ActionEvent e) -> {
-            mostrarVista("salas", "Salas Disponibles");
-        });
+        mntmVerSalas.addActionListener(control);
 
-        mntmDatosPersonales.addActionListener((ActionEvent e) -> {
-            mostrarVista("datospersonales", "Datos Personales");
-        });
+        mntmDatosPersonales.addActionListener(control);
+        mntmDatosPersonales.setActionCommand("DATOS_MONITOR");
 
         // Mostrar la vista inicial por defecto
-        mostrarVista("crearActividades", "Crear Actividades");
+        //mostrarVista("crearActividades", "Crear Actividades");
     }
 
-    /**
-     * Metodo para cambiar la vista que se muestra en el panelContenido.
-     * Actualiza tambien el titulo en el panel superior.
-     * 
-     * @param nombreVista nombre de la vista que se quiere mostrar
-     * @param titulo titulo que se pone en la etiqueta superior
-     */
-    public void mostrarVista(String nombreVista, String titulo) {
-        CardLayout cl = (CardLayout) panelContenido.getLayout();
-        cl.show(panelContenido, nombreVista);
-        lblTitulo.setText(titulo);
-    }
-
-    /**
-     * Devuelve la lista de actividades actuales.
-     * 
-     * @return lista de actividades
-     */
-	public ArrayList<Actividad> getActividades() {
-		return actividades;
-	}
-
-    /**
-     * Establece la lista de actividades que se manejaran.
-     * 
-     * @param actividades lista de actividades a establecer
-     */
-	public void setActividades(ArrayList<Actividad> actividades) {
-		this.actividades = actividades;
-	}
+    
 
     /**
      * Devuelve el panel donde se muestran las vistas.
@@ -172,4 +137,11 @@ public class Monitor extends JFrame {
 	        revalidate();  
 	        repaint();    
 	    }
+	 
+	
+	 public JPanel getPanel() {    	
+	        return panelActual;
+	    }
+	 
+	 
 }

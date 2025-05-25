@@ -52,3 +52,4 @@ public class EditarActividadPanel extends JPanel {
         btnCancelar.addActionListener(escucharVolver);
     }
 }
+

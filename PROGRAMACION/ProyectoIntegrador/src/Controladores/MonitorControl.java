@@ -5,19 +5,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 
 import Main.Sesion;
 import Modelo.AccesoBD;
 import Modelo.Actividad;
+import Modelo.Sala;
 import Modelo.Usuario;
-import vistas.Alumno;
-import vistas.Monitor;
-import vistas.VistaDatosAlumno;
-import vistas.VistaListaActividadesA;
-import vistas.VistaListaActividadesAlumno;
-import vistas.VistaListaActividadesM;
-import vistas.VistaListaActividadesMonitor;
+import vistas.*;
 
 /**
  * Controlador para la gestion de acciones del monitor.
@@ -26,7 +20,7 @@ import vistas.VistaListaActividadesMonitor;
 public class MonitorControl implements ActionListener {
 
     private Monitor vista;
-    private AccesoBD accesobd = new AccesoBD();	
+    private AccesoBD modelo = new AccesoBD();
 
     /**
      * Metodo que se llama cuando se realiza una accion en la interfaz.
@@ -36,54 +30,199 @@ public class MonitorControl implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-
-        AccesoBD accesobd = new AccesoBD();
+        AccesoBD modelo = new AccesoBD();
 
         switch (e.getActionCommand()) {
             case "ACTIVIDADES_DISPONIBLES":
                 MostrarActividadesDisponibles();
                 break;
 
-            case "ACTIVIDADES_MONITOR":
+            case "MIS_ACTIVIDADES":
                 MostrarActividadesMonitor();
                 break;
 
-            case "MIS_INSCRIPCIONES":
-                MostrarActividadesAlumno();
+            case "DATOS_MONITOR":
+                MostrarDatosPersonales();
                 break;
 
-            case "VER_SALAS":
-                // Pendiente implementar
-                break;
-
-            case "DATOS_ALUMNO":
-                // Pendiente implementar
+            case "GUARDAR_DATOS_PERSONALES":
+                GuardarDatosPersonales();
                 break;
 
             case "NUEVA_ACTIVIDAD":
-                // Pendiente implementar
+                NuevaActividad();
+                break;
+
+            case "EDITAR_ACTIVIDAD":
+                EditarActividad();
                 break;
 
             case "BORRAR_ACTIVIDAD":
-                // Pendiente implementar
+                BorrarActividad();
                 break;
 
-            case "INSCRIBIR_ALUMNO":
-                InscribirAlumno();
+            case "GUARDAR_ACTIVIDAD":
+                GuardarActividad();
+                break;
+
+            case "VER_SALAS":
+                VerSalas();
+                break;
+
+            case "NUEVA_SALA":
+                NuevaSala();
+                break;
+
+            case "EDITAR_SALA":
+                EditarSala();
+                break;
+
+            case "BORRAR_SALA":
+                BorrarSala();
+                break;
+
+            case "GUARDAR_SALA":
+                GuardarSala();
+                break;
+
+            case "VOLVER_A_SALAS":
+                VerSalas();
+                break;
+
+            case "VOLVER_A_DISPONIBLES":
+                MostrarActividadesDisponibles();
                 break;
 
             default:
-                System.out.println("Comando no reconocido: " );
+                System.out.println("Comando no reconocido: ");
                 break;
         }
+    }
+
+    /**
+     * Muestra la lista de salas disponibles.
+     * Recupera las salas desde el modelo y actualiza el panel de la vista.
+     */
+    private void VerSalas() {
+        VistaListaSalas panelSalas = new VistaListaSalas(this);
+        ArrayList<Sala> listaSalas = modelo.getListaSalas();
+        panelSalas.setSalas(listaSalas);
+        vista.setPanel(panelSalas);
+    }
+
+    /**
+     * Crea un nuevo formulario para registrar una sala.
+     */
+    private void NuevaSala() {
+        VistaDatosSala datosSala = new VistaDatosSala(this);
+        datosSala.setTitulo("Crear Nueva Sala");
+        vista.setPanel(datosSala);
+    }
+
+    /**
+     * Borra una sala seleccionada por el usuario.
+     * Si no se selecciona ninguna, no hace nada.
+     */
+    private void BorrarSala() {
+        VistaListaSalas panelSalas = (VistaListaSalas) vista.getPanel();
+        Integer id_sala = panelSalas.getSalaSelecionada();
+        if (id_sala != 0) {
+            modelo.BorrarSala(id_sala);
+            VerSalas();
+        }
+    }
+
+    /**
+     * Guarda una nueva sala o actualiza una existente.
+     * Recupera los datos desde el panel actual.
+     */
+    private void GuardarSala() {
+        VistaDatosSala datosSala = (VistaDatosSala) vista.getPanel();
+        Sala sala = datosSala.getDatosSala();
+        modelo.GuardarSala(sala);
+        VerSalas();
+    }
+
+    /**
+     * Muestra un formulario para editar los datos de una sala existente.
+     * Recupera la sala seleccionada por el usuario y carga sus datos.
+     */
+    private void EditarSala() {
+        VistaListaSalas panelListaSalas = (VistaListaSalas) vista.getPanel();
+        Integer id_sala = panelListaSalas.getSalaSelecionada();
+
+        VistaDatosSala editarPanel = new VistaDatosSala(this);
+        editarPanel.setTitulo("Modificar Datos Sala");
+        if (id_sala != 0) {
+            editarPanel.setDatosSala(modelo.getSalaById(id_sala));
+            vista.setPanel(editarPanel);
+        }
+    }
+
+    /**
+     * Elimina una actividad seleccionada por el monitor.
+     * Si no hay seleccion, no realiza ninguna accion.
+     */
+    private void BorrarActividad() {
+        VistaListaActividadesM panelDetalle = (VistaListaActividadesM) vista.getPanel();
+        Integer id_actividad = panelDetalle.getActividadSelecionada();
+        if (id_actividad != 0) {
+            modelo.BorrarActividad(id_actividad);
+            MostrarActividadesDisponibles();
+        }
+    }
+
+    /**
+     * Guarda una nueva actividad o actualiza una existente.
+     * Actualiza la vista una vez guardado.
+     */
+    private void GuardarActividad() {
+        VistaDatosActividad panelDetalle = (VistaDatosActividad) vista.getPanel();
+        Actividad a = panelDetalle.getDatos();
+        panelDetalle.setDatos(modelo.guardarActividad(a));
+        MostrarActividadesDisponibles();
+    }
+
+    /**
+     * Muestra un formulario vacio para registrar una nueva actividad.
+     */
+    private void NuevaActividad() {
+        VistaDatosActividad editarPanel = new VistaDatosActividad(this);
+        editarPanel.setTitulo("Nueva Actividad");
+        vista.setPanel(editarPanel);
+    }
+
+    /**
+     * Muestra un formulario con los datos de una actividad para su edicion.
+     */
+    private void EditarActividad() {
+        VistaListaActividadesM panelDetalle = (VistaListaActividadesM) vista.getPanel();
+        Integer id_actividad = panelDetalle.getActividadSelecionada();
+
+        VistaDatosActividad editarPanel = new VistaDatosActividad(this);
+        editarPanel.setTitulo("Modificar Datos Actividad");
+        if (id_actividad != 0) {
+            editarPanel.setDatos(modelo.getActividadById(id_actividad));
+            vista.setPanel(editarPanel);
+        }
+    }
+
+    /**
+     * Guarda los datos personales del monitor en el modelo.
+     * Muestra un mensaje de confirmacion al finalizar.
+     */
+    private void GuardarDatosPersonales() {
+        VistaDatosMonitor panelDatosMonitor = (VistaDatosMonitor) vista.getPanel();
+        Usuario datosMonitor = panelDatosMonitor.getDatosMonitor();
+        modelo.GuardarDatosPersonales(datosMonitor);
+        JOptionPane.showMessageDialog(vista, "Datos guardados correctamente.");
     }
 
     /**
      * Metodo para inscribir un alumno en una actividad.
      * Actualmente esta comentado y pendiente de implementacion.
      */
-    private void InscribirAlumno() { 
+    private void InscribirAlumno() {
         // Codigo comentado, pendiente de implementar
     }
 
@@ -92,13 +231,11 @@ public class MonitorControl implements ActionListener {
      * Crea un panel con la lista de actividades y la asigna a la vista.
      */
     private void MostrarActividadesDisponibles() {
-        // Se crea como JPanel para pasarselo a la vista
         VistaListaActividadesM panelListaActividades = new VistaListaActividadesM(this);
-        ArrayList<Actividad> actividades = accesobd.consultaActividadesDisponibles(Sesion.getUsuarioLogado().getIdUsuario());
-        // Esto convierte el JPanel a VistaListaActividades para poder llamar a sus metodos
-        panelListaActividades.setTitulo("Actividades Disponibles");   
-        panelListaActividades.setActividades(actividades);        	 	
-        vista.setPanel(panelListaActividades);            
+        ArrayList<Actividad> actividades = modelo.consultaActividades();
+        panelListaActividades.setTitulo("Actividades Disponibles");
+        panelListaActividades.setActividades(actividades);
+        vista.setPanel(panelListaActividades);
     }
 
     /**
@@ -107,9 +244,9 @@ public class MonitorControl implements ActionListener {
      */
     private void MostrarActividadesMonitor() {
         VistaListaActividadesM misActividades = new VistaListaActividadesM(this);
-        ArrayList<Actividad> activ = accesobd.consultaActividadesMonitor(Sesion.getUsuarioLogado().getIdUsuario());
+        ArrayList<Actividad> activ = modelo.consultaActividadesMonitor(Sesion.getUsuarioLogado().getIdUsuario());
         misActividades.setTitulo("Actividades como Monitor");
-        misActividades.setActividades(activ);  
+        misActividades.setActividades(activ);
         vista.setPanel(misActividades);
     }
 
@@ -119,15 +256,26 @@ public class MonitorControl implements ActionListener {
      */
     private void MostrarActividadesAlumno() {
         VistaListaActividadesM misActividades = new VistaListaActividadesM(this);
-        ArrayList<Actividad> activ = accesobd.consultaActividadesAlumno(Sesion.getUsuarioLogado().getIdUsuario());
+        ArrayList<Actividad> activ = modelo.consultaActividadesAlumno(Sesion.getUsuarioLogado().getIdUsuario());
         misActividades.setTitulo("Actividades como Alumno");
-        misActividades.setActividades(activ);  
+        misActividades.setActividades(activ);
         vista.setPanel(misActividades);
     }
 
     /**
+     * Muestra los datos personales del monitor logueado.
+     * Se carga un panel con los datos actuales.
+     */
+    private void MostrarDatosPersonales() {
+        VistaDatosMonitor panelDatosMonitor = new VistaDatosMonitor(this);
+        Usuario datosMonitor = Sesion.getUsuarioLogado();
+        panelDatosMonitor.setDatosMonitor(datosMonitor);
+        vista.setPanel(panelDatosMonitor);
+    }
+
+    /**
      * Obtiene la vista Monitor asociada a este controlador.
-     * 
+     *
      * @return la vista Monitor
      */
     public Monitor getVista() {
@@ -136,11 +284,10 @@ public class MonitorControl implements ActionListener {
 
     /**
      * Asigna la vista Monitor a este controlador.
-     * 
+     *
      * @param monitorVista la vista Monitor que se usara
      */
     public void setVista(Monitor monitorVista) {
         this.vista = monitorVista;
     }
-
 }

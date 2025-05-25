@@ -17,7 +17,7 @@ public class VolverListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		monitor.mostrarVista("crearActividades", "Crear Actividades");
+		//monitor.mostrarVista("crearActividades", "Crear Actividades");
 	}
 
 }

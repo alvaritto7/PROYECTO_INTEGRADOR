@@ -2,6 +2,7 @@ package Modelo;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase que gestiona el acceso a la base de datos y operaciones relacionadas con usuarios, actividades, salas e inscripciones.
@@ -34,7 +35,7 @@ public class AccesoBD {
 	 * @return Mensaje indicando si el inicio de sesión fue exitoso o el tipo de error.
 	 */
 	public String validarUsuario(String usuario, String password) {
-		String consultaUsuario = "SELECT password, tipo_usuario FROM usuario WHERE nombre_usuario = ?";
+		String consultaUsuario = "SELECT password, cicloEducativo FROM usuario WHERE matricula = ?";
 
 		try (PreparedStatement stmt = conexion.prepareStatement(consultaUsuario)) {
 			stmt.setString(1, usuario);
@@ -49,7 +50,12 @@ public class AccesoBD {
 				return "Contraseña incorrecta";
 			}
 
-			this.tipo_usuario = rs.getString("tipo_usuario");
+			String ciclo = rs.getString("cicloEducativo");
+			if(ciclo.equals("TAFD"))
+				this.tipo_usuario = "M";
+			else
+				this.tipo_usuario = "A";
+			
 			return "Login exitoso";
 
 		} catch (SQLException e) {
@@ -73,7 +79,7 @@ public class AccesoBD {
 	 * @return Objeto Usuario con los datos encontrados.
 	 */
 	public Usuario getUsuarioById(Integer id) {
-		String consultaUsuario = "SELECT id_usuario, nombre_usuario, password ,cicloEducativo, tipo_usuario FROM usuario WHERE id_usuario = ?";
+		String consultaUsuario = "SELECT id_usuario, nombre_usuario, password ,cicloEducativo, apellidos_usuario, email, matricula FROM usuario WHERE id_usuario = ?";
 		Usuario usuario = new Usuario();
 
 		try {
@@ -86,7 +92,9 @@ public class AccesoBD {
 				usuario.setNombreUsuario(rs.getString("nombre_usuario"));
 				usuario.setCicloEducativo(rs.getString("cicloEducativo"));
 				usuario.setPassword(rs.getString("password"));
-				usuario.setPassword(rs.getString("tipo_usuario"));
+				usuario.setApellidosUsuario(rs.getString("apellidos_usuario"));
+				usuario.setEmail(rs.getString("email"));
+				usuario.setMatricula(rs.getString("matricula"));
 			}
 
 		} catch (SQLException e) {
@@ -142,6 +150,7 @@ public class AccesoBD {
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
+				actividad.setId(id);
 				actividad.setNombre(rs.getString("nombre_actividad"));
 				actividad.setFecha(rs.getDate("fecha_actividad")); 
 				actividad.setHora(rs.getTime("hora_actividad"));
@@ -223,6 +232,49 @@ public class AccesoBD {
 		return actividades;
 	}
 
+	public Actividad guardarActividad(Actividad a) {
+	    String sql;
+
+	    boolean esNuevo = (a.getId() == 0);
+
+	    if (esNuevo) {
+	        sql = "INSERT INTO actividades (nombre_actividad, fecha_actividad, hora_actividad, duracion_actividad, plazas_actividad, sala_id, monitor_id) "
+	            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+	    } else {
+	        sql = "UPDATE actividades SET nombre_actividad = ?, fecha_actividad = ?, hora_actividad = ?, duracion_actividad = ?, "
+	            + "plazas_actividad = ?, sala_id = ?, monitor_id = ? WHERE id_actividades = " + a.getId();
+	    }
+
+	    try 
+	    {
+	    	PreparedStatement stmt = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	        stmt.setString(1, a.getNombre());
+	        stmt.setDate(2, a.getFecha());
+	        stmt.setTime(3, a.getHora());
+	        stmt.setInt(4, a.getDuracion());
+	        stmt.setInt(5, a.getParticipantesMax());
+	        stmt.setInt(6, a.getIdSala());
+	        stmt.setInt(7, a.getIdMonitor());
+
+	        int filas = stmt.executeUpdate();
+
+	        if (filas > 0 && esNuevo) {
+	            try (ResultSet rs = stmt.getGeneratedKeys()) {
+	                if (rs.next()) {
+	                    a.setId(rs.getInt(1));
+	                }
+	            }
+	        }
+
+	    } catch (SQLException e) {
+	        e.printStackTrace(); // Considera usar un logger para producción
+	    }
+
+	    return a;
+	}
+
+	
+	
 	/**
 	 * Consulta todas las actividades registradas.
 	 * 
@@ -244,8 +296,11 @@ public class AccesoBD {
 				int participantesMax = resultados.getInt(6);
 				int idSala = resultados.getInt(7);
 				int idMonitor = resultados.getInt(8);
+				Usuario monitor = this.getUsuarioById(idMonitor);
+				Sala sala = this.getSalaById(idSala);
+				
 
-				Actividad a = new Actividad(id, nombre, fecha, hora, duracion, participantesMax, idSala, idMonitor);
+				Actividad a = new Actividad(id, nombre, fecha, hora, duracion, participantesMax, idSala, idMonitor, sala, monitor);
 				actividades.add(a);
 			}
 		} catch (SQLException e) {
@@ -336,7 +391,7 @@ public class AccesoBD {
 	 * @return Objeto Usuario con los datos encontrados.
 	 */
 	public Usuario getUsuarioPorNombre(String nombre) {
-		String consultaUsuario = "SELECT id_usuario, nombre_usuario,password , cicloEducativo, tipo_usuario FROM usuario WHERE nombre_usuario = ?";
+		String consultaUsuario = "SELECT id_usuario, nombre_usuario, password ,cicloEducativo, apellidos_usuario, email, matricula FROM usuario WHERE id_usuario = ?";
 		Usuario usuario = new Usuario();
 
 		try {
@@ -348,8 +403,10 @@ public class AccesoBD {
 				usuario.setIdUsuario(rs.getInt("id_usuario"));
 				usuario.setNombreUsuario(nombre);
 				usuario.setCicloEducativo(rs.getString("cicloEducativo"));
-				usuario.setTipoUsuario(rs.getString("tipo_usuario"));
 				usuario.setPassword(rs.getString("password"));
+				usuario.setApellidosUsuario(rs.getString("apellidos_usuario"));
+				usuario.setEmail(rs.getString("email"));
+				usuario.setMatricula(rs.getString("matricula"));
 			}
 		} catch (SQLException e) {
 			return usuario;
@@ -358,6 +415,33 @@ public class AccesoBD {
 		return usuario;
 	}
 
+	
+	public Usuario getUsuarioPorMatricula(String matricula) {
+		String consultaUsuario = "SELECT id_usuario, nombre_usuario, password ,cicloEducativo, apellidos_usuario, email, matricula FROM usuario WHERE matricula = ?";
+		Usuario usuario = new Usuario();
+
+		try {
+			PreparedStatement stmt = conexion.prepareStatement(consultaUsuario);
+			stmt.setString(1, matricula);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				usuario.setIdUsuario(rs.getInt("id_usuario"));
+				usuario.setNombreUsuario(rs.getString("nombre_usuario"));
+				usuario.setCicloEducativo(rs.getString("cicloEducativo"));
+				usuario.setPassword(rs.getString("password"));
+				usuario.setApellidosUsuario(rs.getString("apellidos_usuario"));
+				usuario.setEmail(rs.getString("email"));
+				usuario.setMatricula(matricula);
+			}
+		} catch (SQLException e) {
+			return usuario;
+		}
+
+		return usuario;
+	}
+	
+	
 	/**
 	 * Actualiza los datos personales de un usuario.
 	 * 
@@ -369,13 +453,15 @@ public class AccesoBD {
 		String sql;
 
 		try {
-			sql = "UPDATE usuario SET nombre_usuario = ?, password = ?, cicloEducativo = ?, tipo_usuario = ? WHERE id_usuario = " + id_usuario;
+			sql = "UPDATE usuario SET nombre_usuario = ?, password = ?, cicloEducativo = ?, apellidos_usuario = ? , matricula = ?, email = ?  WHERE id_usuario = " + id_usuario;
 			PreparedStatement stmt = conexion.prepareStatement(sql);
 
 			stmt.setString(1, datosUsuario.getNombreUsuario());
 			stmt.setString(2, datosUsuario.getPassword());
 			stmt.setString(3, datosUsuario.getCicloEducativo());
-			stmt.setString(4, datosUsuario.getTipoUsuario());
+			stmt.setString(4, datosUsuario.getApellidosUsuario());
+			stmt.setString(5, datosUsuario.getMatricula());
+			stmt.setString(6, datosUsuario.getEmail());
 
 			Integer filas = stmt.executeUpdate();
 
@@ -451,6 +537,158 @@ public class AccesoBD {
 
 		return id_inscripcion;
 	}
+	
+	
+	public Integer BorrarActividad(int id_actividad)
+	 {
+		 int filas = 0;
+		 String  sql = "DELETE FROM actividades WHERE id_actividades = ?";
+	      
+
+	        try  {
+	        	PreparedStatement stmt = conexion.prepareStatement(sql);
+	            stmt.setInt(1, id_actividad);	            
+	       
+	            filas = stmt.executeUpdate();          	
+	            
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return filas;
+		 
+	 }
+	
+	
+	public Integer BorrarSala(int id_sala)
+	 {
+		 int filas = 0;
+		 String  sql = "DELETE FROM Sala WHERE id_sala = ?";
+	      
+
+	        try  {
+	        	PreparedStatement stmt = conexion.prepareStatement(sql);
+	            stmt.setInt(1, id_sala);	            
+	       
+	            filas = stmt.executeUpdate();          	
+	            
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return filas;
+		 
+	 }
+	
+	
+	 public ArrayList<Sala> getListaSalas()
+	    {
+		    ArrayList<Sala> listaSalas = new ArrayList<>();
+	    	
+	    	String consulta = "SELECT id_sala, codigo_sala, tipo_sala, capacidad_sala, utilizacion, ocupacion FROM Sala";
+	        try  {
+	        	Statement stmt = conexion.createStatement();	                  
+	            ResultSet rs = stmt.executeQuery(consulta);
+	            
+	            while (rs.next())
+				{
+	            	
+	            	Sala sala = new Sala();
+	            	
+	            	sala.setIdSala(rs.getInt("id_sala"));
+	            	sala.setCodigoSala(rs.getString("codigo_sala"));
+	            	sala.setTipoSala(rs.getString("tipo_sala"));
+	            	sala.setCapacidadSala(rs.getInt("capacidad_sala"));
+	            	sala.setUtilizacion(rs.getDouble("utilizacion"));
+	            	sala.setOcupacion(rs.getDouble("ocupacion"));          	
+	             
+	           	
+	             listaSalas.add(sala);
+				}
+
+	            
+	        } catch (SQLException e) {
+	            
+	        	System.out.println("Error de conexión con la base de datos." + e.getMessage());
+	            return listaSalas;
+	        }
+	        
+	        catch (Exception e) {
+	            
+	        	System.out.println("Error de conexión con la base de datos." + e.getMessage());
+	            return listaSalas;
+	        }
+	    	
+	    	
+	    	return listaSalas;
+	    	
+	    	
+	    	
+	    }
+	    
+	
+	 
+	 public Integer GuardarSala(Sala sala) {
+	       
+	        String sql;
+	        Integer idSala = 0;
+
+	       
+	        if (sala.getIdSala() == 0) { 
+	            sql = "INSERT INTO sala (codigo_Sala, tipo_Sala, capacidad_Sala, utilizacion, ocupacion) "
+	                + "VALUES (?, ?, ?, ?, ?)";
+	        } else {
+	            sql = "UPDATE sala SET codigo_Sala = ?, tipo_Sala = ?, capacidad_Sala = ?, utilizacion = ?, ocupacion = ? "
+	                + "WHERE id_sala = " + sala.getIdSala();
+	        }
+
+	        try  {
+	        	PreparedStatement stmt = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+	            
+	            stmt.setString(1, sala.getCodigoSala());
+	            stmt.setString(2, sala.getTipoSala());
+	            stmt.setInt(3, sala.getCapacidadSala());
+	            
+	            if (sala.getUtilizacion() != null) {
+	                stmt.setDouble(4, sala.getUtilizacion());
+	            } else {
+	                stmt.setNull(4, java.sql.Types.DOUBLE); 
+	            }
+
+	            if (sala.getOcupacion() != null) {
+	                stmt.setDouble(5, sala.getOcupacion());
+	            } else {
+	                stmt.setNull(5, java.sql.Types.DOUBLE); 
+	            }
+
+	            
+	            
+	            int filas = stmt.executeUpdate();
+
+	            
+	            if (filas > 0) {
+	                if (sala.getIdSala() == 0) { // Si es una inserción
+	                    try (ResultSet rs = stmt.getGeneratedKeys()) {
+	                        if (rs.next()) {
+	                            idSala = rs.getInt(1);	                            
+	                        }
+	                    }
+	                } 
+	            }
+
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+
+	        return idSala;
+	    }
+
+	 
+	 
+	
+	
 
 	/**
 	 * Cierra la conexión con la base de datos si está abierta.

@@ -3,6 +3,7 @@ package vistas;
 import javax.swing.*;
 
 import Controladores.AlumnoControl;
+import Main.Sesion;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,7 @@ public class Alumno extends JFrame  {
     private AlumnoControl control;
 
     /**
-     * Constructor que recibe el controlador para manejar eventos.
+     * Constructor que recibe el controlador para gestionar eventos.
      * Configura la ventana y crea el menu con sus opciones.
      * 
      * @param controlador controlador que maneja las acciones de los menus
@@ -27,7 +28,7 @@ public class Alumno extends JFrame  {
     	this.control = controlador;
     	this.control.setVista(this);
     	
-        setTitle("ALUMNO");
+        setTitle("ALUMNO " + Sesion.getUsuarioLogado().getNombreUsuario() + " " + Sesion.getUsuarioLogado().getApellidosUsuario());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800, 600);
         setLocationRelativeTo(null);

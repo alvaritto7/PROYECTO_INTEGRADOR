@@ -33,10 +33,10 @@ public class VistaListaActividades extends JPanel {
 
 	public VistaListaActividades() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[] { 37, 48, 0, 242, 107, 150, 105, 16, 0 };
-		gridBagLayout.rowHeights = new int[] { 85, 0, 0, 101, 150, 50, 29, 0 };
-		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.columnWidths = new int[] { 37, 0, 48, 0, 242, 193, 76, 75, 16, 0 };
+		gridBagLayout.rowHeights = new int[] { 0, 25, 0, 0, 101, 150, 50, 29, 0 };
+		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		lblTitulo = new JLabel("Actividades Disponibles");
@@ -44,22 +44,22 @@ public class VistaListaActividades extends JPanel {
 		lblTitulo.setMaximumSize(new Dimension(196, 60));
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		GridBagConstraints gbc_lblTitulo = new GridBagConstraints();
-		gbc_lblTitulo.gridwidth = 3;
+		gbc_lblTitulo.gridwidth = 5;
 		gbc_lblTitulo.fill = GridBagConstraints.BOTH;
 		gbc_lblTitulo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblTitulo.gridx = 3;
-		gbc_lblTitulo.gridy = 0;
+		gbc_lblTitulo.gridx = 2;
+		gbc_lblTitulo.gridy = 1;
 		add(lblTitulo, gbc_lblTitulo);
 
 		table = new JTable();
 		scrollPane = new JScrollPane(table);
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridheight = 4;
-		gbc_scrollPane.gridwidth = 4;
+		gbc_scrollPane.gridwidth = 6;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 3;
-		gbc_scrollPane.gridy = 1;
+		gbc_scrollPane.gridx = 2;
+		gbc_scrollPane.gridy = 2;
 		add(scrollPane, gbc_scrollPane);
 		
 		
@@ -67,43 +67,46 @@ public class VistaListaActividades extends JPanel {
 		
 		btnInscribirse = new JButton("Inscribirse");
 		GridBagConstraints gbc_btnInscribirse = new GridBagConstraints();
+		gbc_btnInscribirse.anchor = GridBagConstraints.EAST;
 		gbc_btnInscribirse.insets = new Insets(0, 0, 0, 5);
-		gbc_btnInscribirse.gridx = 4;
-		gbc_btnInscribirse.gridy = 6;
+		gbc_btnInscribirse.gridx = 5;
+		gbc_btnInscribirse.gridy = 7;
 		add(btnInscribirse, gbc_btnInscribirse);
 		
 		
-		//Solo se muestran los botones nuevo y borrar para Monitor
-		if(Sesion.getUsuarioLogado().getCicloEducativo().equals("TAFD"))
-		{
+		
 		
 		btnNuevo = new JButton("Nuevo");
 		GridBagConstraints gbc_btnNuevo = new GridBagConstraints();
 		gbc_btnNuevo.anchor = GridBagConstraints.EAST;
 		gbc_btnNuevo.insets = new Insets(0, 0, 0, 5);
-		gbc_btnNuevo.gridx = 5;
-		gbc_btnNuevo.gridy = 6;
+		gbc_btnNuevo.gridx = 6;
+		gbc_btnNuevo.gridy = 7;
 		add(btnNuevo, gbc_btnNuevo);
 
 		btnBorrar = new JButton("Borrar");
 		GridBagConstraints gbc_btnBorrar = new GridBagConstraints();
+		gbc_btnBorrar.anchor = GridBagConstraints.EAST;
 		gbc_btnBorrar.insets = new Insets(0, 0, 0, 5);
-		gbc_btnBorrar.gridx = 6;
-		gbc_btnBorrar.gridy = 6;
+		gbc_btnBorrar.gridx = 7;
+		gbc_btnBorrar.gridy = 7;
 		add(btnBorrar, gbc_btnBorrar);
-		}
+
 		String[] columnas = { "ID", "Nombre", "Fecha", "Hora", "Duracion", "Plazas", "Sala" };
 		DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
 		table.setModel(modelo);
-
-		
-
-	}
+}
+	
 
 	
+
 	
 	
-	
+	/**
+	 * Establece la lista de actividades que se mostraran en la tabla.
+	 * 
+	 * @param listaActividades lista de objetos Actividad a mostrar
+	 */	
 	public void setActividades(ArrayList<Actividad> listaActividades)
 	{
 		actividades = listaActividades;

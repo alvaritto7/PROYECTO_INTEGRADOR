@@ -7,10 +7,12 @@ DROP TABLE if exists usuario;
 /*Tabla de Usuarios.*/
 CREATE TABLE usuario (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    nombre_usuario VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(25) NOT NULL,
-    cicloEducativo ENUM('DAW', 'DAM', 'ASIR', 'A3D', 'TAFD', 'EI', 'CI') NOT NULL,
-    tipo_usuario ENUM('monitor', 'alumno') NOT NULL DEFAULT 'alumno'
+	matricula varchar(10) NOT NULL UNIQUE,
+    nombre_usuario VARCHAR(100)  UNIQUE,
+	apellidos_usuario varchar(100),
+	email varchar(150),
+	cicloEducativo ENUM('DAW', 'DAM', 'ASIR', 'A3D', 'TAFD', 'EI', 'CI') NOT NULL,
+    password VARCHAR(25) NOT NULL
 );
 
 
@@ -51,13 +53,19 @@ CREATE TABLE inscripciones (
 /*INSERTS*/
 
 -- Usuarios
-INSERT INTO usuario (nombre_usuario, password, cicloEducativo, tipo_usuario) VALUES
-('Hugochu', '00000', 'DAW', 'monitor'),
-('Lucia', '00001', 'TAFD', 'monitor'),
-('Marcos', '00002', 'TAFD', 'monitor'),
-('Ana', '00003', 'A3D', 'alumno'),
-('Alvaro', '00004', 'EI', 'alumno'),
-('Adrian', '00005', 'CI', 'alumno');
+INSERT INTO usuario (matricula, nombre_usuario, apellidos_usuario, email, cicloEducativo, password) VALUES
+('0001', 'Hugochu', 'García Pérez', 'hugochu@example.com', 'DAW', '0001'),
+('0002', 'Lucia', 'Martínez López', 'lucia@example.com', 'TAFD', '0002'),
+('0003', 'Marcos', 'Sánchez Díaz', 'marcos@example.com', 'TAFD', '0003'),
+('0004', 'Ana', 'Fernández Ruiz', 'ana@example.com', 'A3D', '0004'),
+('0005', 'Alvaro', 'Gómez Torres', 'alvaro@example.com', 'EI', '0005'),
+('0006', 'Adrian', 'Moreno Núñez', 'adrian@example.com', 'CI', '0006'),
+('0007', 'Carlos', 'Ramírez Ortega', 'carlos@example.com', 'DAM', '0007'),
+('0008', 'Elena', 'Jiménez Alba', 'elena@example.com', 'DAW', '0008'),
+('0009', 'Sofía', 'Navarro Gil', 'sofia@example.com', 'ASIR', '0009'),
+('0010', 'Jorge', 'Domínguez León', 'jorge@example.com', 'TAFD', '0010'),
+('0011', 'Paula', 'Castillo Vela', 'paula@example.com', 'CI', '0011'),
+('0012', 'David', 'Reyes Ríos', 'david@example.com', 'DAM', '0012');
 
 
 -- Salas

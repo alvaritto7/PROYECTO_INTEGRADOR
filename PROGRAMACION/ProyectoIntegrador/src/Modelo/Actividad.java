@@ -2,6 +2,8 @@ package Modelo;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Clase que representa una actividad que se realiza en el centro.
@@ -76,6 +78,18 @@ public class Actividad {
 		this.sala = sala;
 		this.monitor = monitor;
 	}
+	
+	
+	
+	public void setHora(Time hora) {
+		this.hora = hora;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	
 
 	/**
 	 * Devuelve el ID de la actividad.
@@ -121,24 +135,22 @@ public class Actividad {
 	 * Establece la fecha de la actividad.
 	 * @param fecha Fecha de la actividad
 	 */
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
+
 
 	/**
 	 * Devuelve la hora de inicio de la actividad.
 	 * @return hora
 	 */
-	public Time getHora() {
-		return hora;
-	}
+
 
 	/**
 	 * Establece la hora de inicio de la actividad.
 	 * @param hora Hora de la actividad
 	 */
-	public void setHora(Time hora) {
-		this.hora = hora;
+	
+
+	public Time getHora() {
+		return hora;
 	}
 
 	/**

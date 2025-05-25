@@ -44,7 +44,7 @@ public class EditarActividadListener implements ActionListener {
 		// los datos de la actividad
 
 		monitor.getPanelContenido().add(editarPanel, "editarActividad");
-		monitor.mostrarVista("editarActividad", "Editar Actividad");
+		//monitor.mostrarVista("editarActividad", "Editar Actividad");
 
 	}
 

@@ -36,9 +36,9 @@ public class VistaListaActividadesAlumno extends JPanel {
     	
         GridBagLayout gridBagLayout = new GridBagLayout();
         gridBagLayout.columnWidths = new int[]{37, 48, 242, 188, 105, 16, 0};
-        gridBagLayout.rowHeights = new int[]{85, 0, 20, 101, 50, 20, 0, 29, 0};
+        gridBagLayout.rowHeights = new int[]{0, 85, 0, 20, 101, 50, 20, 0, 29, 0};
         gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+        gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
         setLayout(gridBagLayout);
                                         
                                                 lblTitulo = new JLabel("Lista de Inscripciones Alumno");
@@ -50,7 +50,7 @@ public class VistaListaActividadesAlumno extends JPanel {
                                                 gbc_lblTitulo.fill = GridBagConstraints.BOTH;
                                                 gbc_lblTitulo.insets = new Insets(0, 0, 5, 5);
                                                 gbc_lblTitulo.gridx = 2;
-                                                gbc_lblTitulo.gridy = 0;
+                                                gbc_lblTitulo.gridy = 1;
                                                 add(lblTitulo, gbc_lblTitulo);
                                 
                                         table = new JTable();
@@ -61,7 +61,7 @@ public class VistaListaActividadesAlumno extends JPanel {
                                         gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
                                         gbc_scrollPane.fill = GridBagConstraints.BOTH;
                                         gbc_scrollPane.gridx = 2;
-                                        gbc_scrollPane.gridy = 1;
+                                        gbc_scrollPane.gridy = 2;
                                         add(scrollPane, gbc_scrollPane);
                                 
                                 btnBorrar = new JButton("Borrar");
@@ -70,7 +70,7 @@ public class VistaListaActividadesAlumno extends JPanel {
                                 GridBagConstraints gbc_btnBorrar = new GridBagConstraints();
                                 gbc_btnBorrar.insets = new Insets(0, 0, 0, 5);
                                 gbc_btnBorrar.gridx = 4;
-                                gbc_btnBorrar.gridy = 7;
+                                gbc_btnBorrar.gridy = 8;
                                 add(btnBorrar, gbc_btnBorrar);
                                 
                                 			

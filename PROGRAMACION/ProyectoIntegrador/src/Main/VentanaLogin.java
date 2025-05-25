@@ -1,7 +1,11 @@
 package Main;
 
+import javax.swing.JOptionPane;
+
+
 import Controladores.LoginControl;
 import Modelo.AccesoBD;
+
 import vistas.LoginVista;
 
 /**
@@ -16,13 +20,27 @@ public class VentanaLogin {
      * @param args argumentos que se pueden pasar al programa desde la linea de comandos
      */
     public static void main(String[] args) {
-        // TODO Auto-generated method stub
-        AccesoBD modelo = new AccesoBD();
+    	
+    	
+	java.awt.EventQueue.invokeLater(new Runnable() {
+			
+			public void run() {
+				
+				// TODO Auto-generated method stub        
+		        LoginVista vista = new LoginVista();
+		        LoginControl control = new LoginControl(vista);
+		        vista.hacerVisible(); 
+				
+				
 
-        LoginVista vista = new LoginVista();
-        vista.hacerVisible(); 
-
-        LoginControl control = new LoginControl(vista);
+				
+			}
+			
+		});
+		
+    	
+   
+        
     }
 
 }

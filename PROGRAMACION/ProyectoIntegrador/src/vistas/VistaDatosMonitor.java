@@ -9,37 +9,38 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 
 import Controladores.AlumnoControl;
+import Controladores.MonitorControl;
 
 import java.awt.Insets;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.Font;
 
-public class VistaDatosAlumno extends JPanel {
+public class VistaDatosMonitor extends JPanel {
 	private JTextField txtNombre;
-	private JTextField txtCiclo;
+	private JTextField txtApellidos;
 	private JPasswordField txtPass;
 	private JLabel lblNewLabel_5;
 	private JButton btnGuardar;
 	private JTextField txtUsuarioId;
 	private JLabel lblNewLabel_7;
 	private JLabel lblNewLabel_8;
-	private AlumnoControl controlador;
-	private JLabel lblMatricula;
-	private JLabel lblNewLabel_4;
-	private JLabel lblNewLabel_9;
-	private JTextField txtApellidos;
+	private MonitorControl controlador;
+	private JLabel lblNewLabel_2;
 	private JTextField txtMatricula;
+	private JLabel lblNewLabel_4;
+	private JTextField txtCiclo;
+	private JLabel lblNewLabel_9;
 	private JTextField txtEmail;
 	private JLabel lblNewLabel_1;
 	
 	/**
-	 * Constructor de la clase VistaDatosAlumno.
-	 * Recibe un controlador para manejar los eventos del boton.
+	 * Constructor de la clase VistaDatosMonitor.
+	 * Recibe el controlador de los eventos del boton.
 	 * Configura el layout y agrega los componentes al panel.
-	 * @param control controlador que maneja eventos del alumno
+	 * @param control controlador que maneja eventos del monitor
 	 */
-	public VistaDatosAlumno(AlumnoControl control) {
+	public VistaDatosMonitor(MonitorControl control) {
 		
 		this.controlador = control;
 		
@@ -94,14 +95,13 @@ public class VistaDatosAlumno extends JPanel {
 		add(txtUsuarioId, gbc_txtUsuarioId);
 		txtUsuarioId.setColumns(10);
 		
-		lblMatricula = new JLabel("Matricula:");
-		lblMatricula.setToolTipText("");
-		GridBagConstraints gbc_lblMatricula = new GridBagConstraints();
-		gbc_lblMatricula.anchor = GridBagConstraints.WEST;
-		gbc_lblMatricula.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMatricula.gridx = 4;
-		gbc_lblMatricula.gridy = 4;
-		add(lblMatricula, gbc_lblMatricula);
+		lblNewLabel_2 = new JLabel("Matrícula:");
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_2.gridx = 4;
+		gbc_lblNewLabel_2.gridy = 4;
+		add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
 		txtMatricula = new JTextField();
 		txtMatricula.setToolTipText("");
@@ -136,19 +136,16 @@ public class VistaDatosAlumno extends JPanel {
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 		
-		lblNewLabel_4 = new JLabel("Apelllidos:");
-		lblNewLabel_4.setToolTipText("");
-		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-		gbc_lblNewLabel_4.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_4.gridx = 4;
-		gbc_lblNewLabel_4.gridy = 6;
-		add(lblNewLabel_4, gbc_lblNewLabel_4);
+		JLabel lblNewLabel_3 = new JLabel("Apellidos:");
+		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+		gbc_lblNewLabel_3.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_3.gridx = 4;
+		gbc_lblNewLabel_3.gridy = 6;
+		add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
 		txtApellidos = new JTextField();
-		txtApellidos.setToolTipText("");
 		txtApellidos.setText(" ");
-		txtApellidos.setColumns(10);
 		GridBagConstraints gbc_txtApellidos = new GridBagConstraints();
 		gbc_txtApellidos.gridwidth = 2;
 		gbc_txtApellidos.insets = new Insets(0, 0, 5, 5);
@@ -156,9 +153,9 @@ public class VistaDatosAlumno extends JPanel {
 		gbc_txtApellidos.gridx = 5;
 		gbc_txtApellidos.gridy = 6;
 		add(txtApellidos, gbc_txtApellidos);
+		txtApellidos.setColumns(10);
 		
 		lblNewLabel_9 = new JLabel("Email:");
-		lblNewLabel_9.setToolTipText("");
 		GridBagConstraints gbc_lblNewLabel_9 = new GridBagConstraints();
 		gbc_lblNewLabel_9.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_9.insets = new Insets(0, 0, 5, 5);
@@ -167,7 +164,6 @@ public class VistaDatosAlumno extends JPanel {
 		add(lblNewLabel_9, gbc_lblNewLabel_9);
 		
 		txtEmail = new JTextField();
-		txtEmail.setToolTipText("");
 		txtEmail.setText(" ");
 		txtEmail.setColumns(10);
 		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
@@ -178,17 +174,18 @@ public class VistaDatosAlumno extends JPanel {
 		gbc_txtEmail.gridy = 7;
 		add(txtEmail, gbc_txtEmail);
 		
-		JLabel lblNewLabel_3 = new JLabel("Ciclo:");
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_3.gridx = 4;
-		gbc_lblNewLabel_3.gridy = 8;
-		add(lblNewLabel_3, gbc_lblNewLabel_3);
+		lblNewLabel_4 = new JLabel("Ciclo;");
+		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
+		gbc_lblNewLabel_4.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_4.gridx = 4;
+		gbc_lblNewLabel_4.gridy = 8;
+		add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
 		txtCiclo = new JTextField();
 		txtCiclo.setText(" ");
 		txtCiclo.setEnabled(false);
+		txtCiclo.setColumns(10);
 		GridBagConstraints gbc_txtCiclo = new GridBagConstraints();
 		gbc_txtCiclo.gridwidth = 2;
 		gbc_txtCiclo.insets = new Insets(0, 0, 5, 5);
@@ -196,7 +193,6 @@ public class VistaDatosAlumno extends JPanel {
 		gbc_txtCiclo.gridx = 5;
 		gbc_txtCiclo.gridy = 8;
 		add(txtCiclo, gbc_txtCiclo);
-		txtCiclo.setColumns(10);
 		
 		JLabel lblNewLabel_6 = new JLabel("Contraseña:");
 		GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
@@ -231,7 +227,7 @@ public class VistaDatosAlumno extends JPanel {
 	 * Actualiza los campos con los datos del alumno recibido.
 	 * @param alumno objeto Usuario con los datos del alumno
 	 */
-	public void setDatosAlumno(Usuario alumno)
+	public void setDatosMonitor(Usuario alumno)
 	{
 		txtNombre.setText(alumno.getNombreUsuario());
 		txtUsuarioId.setText(alumno.getIdUsuario().toString());
@@ -243,11 +239,16 @@ public class VistaDatosAlumno extends JPanel {
 		
 	}
 	
-	
-	public Usuario getDatosAlumno()
+	/**
+	 * Recupera los datos introducidos en el formulario del monitor
+	 * y construye un objeto Usuario con esa informacion.
+	 * 
+	 * @return objeto Usuario con los datos ingresados
+	 */
+	public Usuario getDatosMonitor()
 	{
 		Usuario usuario = new Usuario();
-		usuario.setIdUsuario( Integer.parseInt(txtUsuarioId.getText()));
+		usuario.setIdUsuario( Integer.parseInt(   txtUsuarioId.getText()));
 		usuario.setNombreUsuario(txtNombre.getText());
 		usuario.setCicloEducativo(txtCiclo.getText());
 		usuario.setPassword(new String(txtPass.getPassword()));
@@ -257,7 +258,6 @@ public class VistaDatosAlumno extends JPanel {
 		
 		return usuario;
 	}
-	
 	
 	
 	/**
@@ -273,7 +273,7 @@ public class VistaDatosAlumno extends JPanel {
 	 * @return ciclo educativo del alumno
 	 */
 	public String getCicloEducativo() {
-		return txtCiclo.getText();
+		return txtApellidos.getText();
 	}
 	
 	/**
@@ -292,7 +292,6 @@ public class VistaDatosAlumno extends JPanel {
 		return new String(txtPass.getPassword());
 	}
 	
-
 	/**
 	 * Obtiene el número de Matrícula del usuario en el campo correspondiente.
 	 * @return Matricula
