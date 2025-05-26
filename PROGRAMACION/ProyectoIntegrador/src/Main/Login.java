@@ -11,7 +11,7 @@ import vistas.LoginVista;
 /**
  * Clase principal que inicia la aplicacion mostrando la ventana de login.
  */
-public class VentanaLogin {
+public class Login {
 
     /**
      * Metodo principal que se ejecuta al iniciar el programa.
