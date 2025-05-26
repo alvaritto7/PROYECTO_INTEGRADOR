@@ -142,7 +142,7 @@ public class AccesoBD {
 	 * @return Objeto Actividad con los datos encontrados.
 	 */
 	public Actividad getActividadById(Integer id) {
-		String sql = "SELECT nombre_actividad, fecha_actividad, hora_actividad, duracion_actividad, plazas_actividad, monitor_id, sala_id FROM actividades WHERE id_actividades = ?";
+		String sql = "SELECT nombre_actividad, fecha_actividad, hora_actividad, duracion_actividad, plazas_actividad, monitor_id, sala_id FROM actividades   WHERE fecha_actividad > CURRENT_DATE AND id_actividades = ?";
 		Actividad actividad = new Actividad();
 
 		try {
@@ -206,7 +206,7 @@ public class AccesoBD {
 		ArrayList<Actividad> actividades = new ArrayList<>();
 
 		try {
-			String consulta = "SELECT a.* FROM Actividades a WHERE a.id_actividades NOT IN (SELECT actividad_id FROM Inscripciones WHERE usuario_id = ?)";
+			String consulta = "SELECT a.* FROM Actividades a WHERE  fecha_actividad > CURRENT_DATE AND a.id_actividades NOT IN (SELECT actividad_id FROM Inscripciones WHERE usuario_id = ?)";
 			PreparedStatement stmt = conexion.prepareStatement(consulta);
 			stmt.setInt(1, id_usuario);
 			ResultSet resultados = stmt.executeQuery();
@@ -292,7 +292,7 @@ public class AccesoBD {
 
 		try {
 			Statement stmt = conexion.createStatement();
-			ResultSet resultados = stmt.executeQuery("SELECT * FROM Actividades");
+			ResultSet resultados = stmt.executeQuery("SELECT * FROM Actividades WHERE  fecha_actividad > CURRENT_DATE");
 
 			while (resultados.next()) {
 				int id = resultados.getInt(1);
@@ -327,7 +327,7 @@ public class AccesoBD {
 		ArrayList<Actividad> actividades = new ArrayList<>();
 
 		try {
-			String consulta = "SELECT * FROM ACTIVIDADES WHERE monitor_id = ?";
+			String consulta = "SELECT * FROM ACTIVIDADES  WHERE   fecha_actividad > CURRENT_DATE AND monitor_id = ?";
 			PreparedStatement stmt = conexion.prepareStatement(consulta);
 			stmt.setInt(1, id_monitor);
 			ResultSet resultados = stmt.executeQuery();
@@ -364,7 +364,7 @@ public class AccesoBD {
 		ArrayList<Actividad> actividades = new ArrayList<>();
 
 		try {
-			String consulta = "SELECT * FROM ACTIVIDADES WHERE id_actividades IN (SELECT actividad_id FROM inscripciones WHERE usuario_id = ?)";
+			String consulta = "SELECT * FROM ACTIVIDADES WHERE   fecha_actividad > CURRENT_DATE AND id_actividades IN (SELECT actividad_id FROM inscripciones WHERE usuario_id = ?)";
 			PreparedStatement stmt = conexion.prepareStatement(consulta);
 			stmt.setInt(1, id_alumno);
 			ResultSet resultados = stmt.executeQuery();

@@ -94,7 +94,7 @@ public class VistaListaSalas extends JPanel {
 //                gbc_btnEditar.gridy = 8;
 //                add(btnEditar, gbc_btnEditar);
 
-        String[] columnas = { "ID", "Codigo Sala", "Tipo Sala", "Capacidad Sala", "Utilizacion", "Ocupacion"};
+        String[] columnas = { "Codigo Sala", "Tipo Sala", "Capacidad Sala" /*,  "ID", "Utilizacion", "Ocupacion"*/};
         DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
         table.setModel(modelo);
         
@@ -141,18 +141,18 @@ public class VistaListaSalas extends JPanel {
      * @param listaSalas lista de objetos Sala a mostrar
      */
     public void setSalas(ArrayList<Sala> listaSalas) {
-        String[] columnas = { "ID", "Codigo Sala", "Tipo Sala", "Capacidad Sala", "Utilizacion", "Ocupacion"};
+        String[] columnas = {  "Codigo Sala", "Tipo Sala", "Capacidad Sala" /*, "ID", "Utilizacion", "Ocupacion"*/};
         DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
         table.setModel(modelo);
 
         for (Sala s : listaSalas) {
             modelo.addRow(new Object[] {
-                s.getIdSala(),
+              //  s.getIdSala(),
                 s.getCodigoSala(),
                 s.getTipoSala(),
-                s.getCapacidadSala(),
-                s.getUtilizacion(),
-                s.getOcupacion()
+                s.getCapacidadSala()
+               // s.getUtilizacion(),
+               // s.getOcupacion()
             });
         }
     }

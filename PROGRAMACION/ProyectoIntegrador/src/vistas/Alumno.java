@@ -67,6 +67,14 @@ public class Alumno extends JFrame  {
 
         mntmDatosPersonales.addActionListener(control);
         mntmDatosPersonales.setActionCommand("DATOS_ALUMNO");
+        
+        JMenu mnCerrarSesion = new JMenu("Sesion");        
+        menuBar.add(mnCerrarSesion);
+        
+        JMenuItem mnitemLogout = new JMenuItem("Logout");
+        mnitemLogout.addActionListener(control);
+        mnitemLogout.setActionCommand("CERRAR_SESION");
+        mnCerrarSesion.add(mnitemLogout);
     }
 
     /**
@@ -94,4 +102,9 @@ public class Alumno extends JFrame  {
         revalidate();  
         repaint();    
     }
+    
+    
+    
+    
+    
 }

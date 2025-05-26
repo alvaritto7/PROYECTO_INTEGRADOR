@@ -76,6 +76,7 @@ public class VistaDatosMonitor extends JPanel {
 		add(lblNewLabel_5, gbc_lblNewLabel_5);
 		
 		lblNewLabel_7 = new JLabel("ID Usuario:");
+		lblNewLabel_7.setVisible(false);
 		GridBagConstraints gbc_lblNewLabel_7 = new GridBagConstraints();
 		gbc_lblNewLabel_7.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_7.insets = new Insets(0, 0, 5, 5);
@@ -84,6 +85,7 @@ public class VistaDatosMonitor extends JPanel {
 		add(lblNewLabel_7, gbc_lblNewLabel_7);
 		
 		txtUsuarioId = new JTextField();
+		txtUsuarioId.setVisible(false);
 		txtUsuarioId.setEnabled(false);
 		txtUsuarioId.setText("");
 		GridBagConstraints gbc_txtUsuarioId = new GridBagConstraints();
@@ -107,6 +109,8 @@ public class VistaDatosMonitor extends JPanel {
 		txtMatricula.setToolTipText("");
 		txtMatricula.setText(" ");
 		txtMatricula.setColumns(10);
+		txtMatricula.setEnabled(false);
+		
 		GridBagConstraints gbc_txtMatricula = new GridBagConstraints();
 		gbc_txtMatricula.gridwidth = 2;
 		gbc_txtMatricula.insets = new Insets(0, 0, 5, 5);
@@ -166,6 +170,7 @@ public class VistaDatosMonitor extends JPanel {
 		txtEmail = new JTextField();
 		txtEmail.setText(" ");
 		txtEmail.setColumns(10);
+		txtEmail.setEnabled(false);
 		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
 		gbc_txtEmail.gridwidth = 2;
 		gbc_txtEmail.insets = new Insets(0, 0, 5, 5);
@@ -174,7 +179,7 @@ public class VistaDatosMonitor extends JPanel {
 		gbc_txtEmail.gridy = 7;
 		add(txtEmail, gbc_txtEmail);
 		
-		lblNewLabel_4 = new JLabel("Ciclo;");
+		lblNewLabel_4 = new JLabel("Ciclo:");
 		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
 		gbc_lblNewLabel_4.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
@@ -203,6 +208,7 @@ public class VistaDatosMonitor extends JPanel {
 		add(lblNewLabel_6, gbc_lblNewLabel_6);
 		
 		txtPass = new JPasswordField();
+		txtPass.setEditable(false);
 		GridBagConstraints gbc_txtPass = new GridBagConstraints();
 		gbc_txtPass.gridwidth = 2;
 		gbc_txtPass.insets = new Insets(0, 0, 5, 5);

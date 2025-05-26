@@ -84,7 +84,10 @@ public class VistaListaActividadesM extends JPanel {
         add(lblTitulo, gbc_lblTitulo);
 
         // Inicializacion de la tabla
-        table = new JTable();
+        //table = new JTable();
+         table = new JTable() ;
+        
+        
         scrollPane = new JScrollPane(table);
         GridBagConstraints gbc_scrollPane = new GridBagConstraints();
         gbc_scrollPane.gridheight = 4;
@@ -199,4 +202,17 @@ public class VistaListaActividadesM extends JPanel {
     public void setTitulo(String titulo) {
         lblTitulo.setText(titulo);
     }
+    
+    
+    public void OcultarBotones()
+    {
+    	
+    	this.btnBorrar.setEnabled(false);
+    	this.btnEditar.setEnabled(false);
+    	
+    }
+    
+    
+    
+    
 }

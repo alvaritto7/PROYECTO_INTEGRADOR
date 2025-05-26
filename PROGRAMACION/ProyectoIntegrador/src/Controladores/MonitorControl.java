@@ -2,6 +2,7 @@ package Controladores;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
@@ -68,29 +69,34 @@ public class MonitorControl implements ActionListener {
             case "VER_SALAS":
                 VerSalas();
                 break;
-
-            case "NUEVA_SALA":
-                NuevaSala();
+                
+            case "CERRAR_SESION" :
+            	CerrarSesion();               
                 break;
-
-            case "EDITAR_SALA":
-                EditarSala();
-                break;
-
-            case "BORRAR_SALA":
-                BorrarSala();
-                break;
-
-            case "GUARDAR_SALA":
-                GuardarSala();
-                break;
+            
+//
+//            case "NUEVA_SALA":
+//                NuevaSala();
+//                break;
+//
+//            case "EDITAR_SALA":
+//                EditarSala();
+//                break;
+//
+//            case "BORRAR_SALA":
+//                BorrarSala();
+//                break;
+//
+//            case "GUARDAR_SALA":
+//                GuardarSala();
+//                break;
 
             case "VOLVER_A_SALAS":
                 VerSalas();
                 break;
 
             case "VOLVER_A_DISPONIBLES":
-                MostrarActividadesDisponibles();
+            	MostrarActividadesMonitor();
                 break;
 
             default:
@@ -99,6 +105,16 @@ public class MonitorControl implements ActionListener {
         }
     }
 
+    
+    private void CerrarSesion()
+    {
+    	vista.dispose();
+    	System.exit(0);
+    	
+    }
+    
+    
+    
     /**
      * Muestra la lista de salas disponibles.
      * Recupera las salas desde el modelo y actualiza el panel de la vista.
@@ -112,7 +128,7 @@ public class MonitorControl implements ActionListener {
 
 //    /**
 //     * Crea un nuevo formulario para registrar una sala.
-//     */
+//     */ 
 //    private void NuevaSala() {
 //        VistaDatosSala datosSala = new VistaDatosSala(this);
 //        datosSala.setTitulo("Crear Nueva Sala");
@@ -164,12 +180,17 @@ public class MonitorControl implements ActionListener {
      * Si no hay seleccion, no realiza ninguna accion.
      */
     private void BorrarActividad() {
-        VistaListaActividadesM panelDetalle = (VistaListaActividadesM) vista.getPanel();
-        Integer id_actividad = panelDetalle.getActividadSelecionada();
-        if (id_actividad != 0) {
-            modelo.BorrarActividad(id_actividad);
-            MostrarActividadesDisponibles();
-        }
+    	
+    	
+	        VistaListaActividadesM panelDetalle = (VistaListaActividadesM) vista.getPanel();
+	        Integer id_actividad = panelDetalle.getActividadSelecionada();
+	        if (id_actividad != 0) {
+	            modelo.BorrarActividad(id_actividad);
+	            MostrarActividadesMonitor();
+	        }
+    	
+        
+        
     }
 
     /**
@@ -180,7 +201,7 @@ public class MonitorControl implements ActionListener {
         VistaDatosActividad panelDetalle = (VistaDatosActividad) vista.getPanel();
         Actividad a = panelDetalle.getDatos();
         panelDetalle.setDatos(modelo.guardarActividad(a));
-        MostrarActividadesDisponibles();
+        MostrarActividadesMonitor();
     }
 
     /**
@@ -214,7 +235,8 @@ public class MonitorControl implements ActionListener {
     private void GuardarDatosPersonales() {
         VistaDatosMonitor panelDatosMonitor = (VistaDatosMonitor) vista.getPanel();
         Usuario datosMonitor = panelDatosMonitor.getDatosMonitor();
-        modelo.GuardarDatosPersonales(datosMonitor);
+        Usuario usuarioGuardado = modelo.GuardarDatosPersonales(datosMonitor);
+        Sesion.setUsuarioLogado(usuarioGuardado);
         JOptionPane.showMessageDialog(vista, "Datos guardados correctamente.");
     }
 
@@ -233,8 +255,9 @@ public class MonitorControl implements ActionListener {
     private void MostrarActividadesDisponibles() {
         VistaListaActividadesM panelListaActividades = new VistaListaActividadesM(this);
         ArrayList<Actividad> actividades = modelo.consultaActividades();
-        panelListaActividades.setTitulo("Actividades Disponibles");
+        panelListaActividades.setTitulo("Lista de Actividades de todos los monitores");
         panelListaActividades.setActividades(actividades);
+        panelListaActividades.OcultarBotones();
         vista.setPanel(panelListaActividades);
     }
 
@@ -245,7 +268,7 @@ public class MonitorControl implements ActionListener {
     private void MostrarActividadesMonitor() {
         VistaListaActividadesM misActividades = new VistaListaActividadesM(this);
         ArrayList<Actividad> activ = modelo.consultaActividadesMonitor(Sesion.getUsuarioLogado().getIdUsuario());
-        misActividades.setTitulo("Actividades como Monitor");
+        misActividades.setTitulo("Mis Actividades como Monitor");
         misActividades.setActividades(activ);
         vista.setPanel(misActividades);
     }
@@ -257,7 +280,7 @@ public class MonitorControl implements ActionListener {
     private void MostrarActividadesAlumno() {
         VistaListaActividadesM misActividades = new VistaListaActividadesM(this);
         ArrayList<Actividad> activ = modelo.consultaActividadesAlumno(Sesion.getUsuarioLogado().getIdUsuario());
-        misActividades.setTitulo("Actividades como Alumno");
+        misActividades.setTitulo("Mis Actividades como Alumno");
         misActividades.setActividades(activ);
         vista.setPanel(misActividades);
     }

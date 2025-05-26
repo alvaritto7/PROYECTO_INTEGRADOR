@@ -36,8 +36,8 @@ public class Monitor extends JFrame {
     public Monitor(MonitorControl controlador) 
     {
     	
-    	this.control = controlador;
-    	this.control.setVista(this);
+    	control = controlador;
+    	control.setVista(this);
     	
         setTitle("MONITOR " + Sesion.getUsuarioLogado().getNombreUsuario() + " " + Sesion.getUsuarioLogado().getApellidosUsuario());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -103,6 +103,14 @@ public class Monitor extends JFrame {
 
         mntmDatosPersonales.addActionListener(control);
         mntmDatosPersonales.setActionCommand("DATOS_MONITOR");
+        
+        JMenu mnCerrarSesion = new JMenu("Sesion");       
+        menuBar.add(mnCerrarSesion);
+        
+        JMenuItem mnitemLogout = new JMenuItem("Logout");
+        mnitemLogout.addActionListener(control);
+        mnitemLogout.setActionCommand("CERRAR_SESION");
+        mnCerrarSesion.add(mnitemLogout);
 
         // Mostrar la vista inicial por defecto
         //mostrarVista("crearActividades", "Crear Actividades");

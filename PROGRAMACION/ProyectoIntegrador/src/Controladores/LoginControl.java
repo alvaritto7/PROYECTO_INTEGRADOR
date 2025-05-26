@@ -50,11 +50,11 @@ public class LoginControl implements ActionListener {
 
         switch (resultado) {
             case "Usuario no existe":
-                JOptionPane.showMessageDialog(vista, "El usuario introducido no existe en la base de datos.");
+                JOptionPane.showMessageDialog(vista, "Matricula incorrecta, por favor vuelva a intentarlo.");
                 break;
 
             case "Contraseña incorrecta":
-                JOptionPane.showMessageDialog(vista, "Contraseña Incorrecta, porfavor vuelva a intentarlo.");
+                JOptionPane.showMessageDialog(vista, "Contraseña Incorrecta, por favor vuelva a intentarlo.");
                 break;
 
             case "Login exitoso":

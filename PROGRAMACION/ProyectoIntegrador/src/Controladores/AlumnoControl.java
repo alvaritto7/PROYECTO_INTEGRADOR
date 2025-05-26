@@ -25,7 +25,7 @@ import vistas.VistaListaActividadesAlumno;
 public class AlumnoControl implements ActionListener {
 
     private Alumno vista;
-    private AccesoBD accesobd = new AccesoBD();
+    private AccesoBD modelo = new AccesoBD();
 
     /**
      * Devuelve la vista asociada a este controlador.
@@ -82,12 +82,23 @@ public class AlumnoControl implements ActionListener {
             case "BORRAR_INSCRIPCION" :
                 BorrarInscripcion();               
                 break;
+            case "CERRAR_SESION" :
+            	CerrarSesion();               
+                break;
             
             default:
                 System.out.println("Comando no reconocido: " );
                 break;
         }
     }
+    
+    
+    private void CerrarSesion()
+    {
+    	vista.dispose();
+    	System.exit(0);    	
+    }
+    
 
     /**
      * Borra la inscripcion del alumno en la actividad seleccionada.
@@ -98,7 +109,7 @@ public class AlumnoControl implements ActionListener {
         Integer actividad_seleccionada = misActividades.getActividadSelecionada();    
         
         if(actividad_seleccionada != 0) {
-            accesobd.BorrarInscripcion(Sesion.getUsuarioLogado().getIdUsuario(), actividad_seleccionada);        
+            modelo.BorrarInscripcion(Sesion.getUsuarioLogado().getIdUsuario(), actividad_seleccionada);        
             MostrarMisActividades();
             JOptionPane.showMessageDialog(vista, "Inscripcion eliminada correctamente.");
         } else {
@@ -116,7 +127,7 @@ public class AlumnoControl implements ActionListener {
         Integer actividad_seleccionada = panelListaActividades.getActividadSelecionada();      
         
         if(actividad_seleccionada != 0) {
-            accesobd.RealizarInscripcion(Sesion.getUsuarioLogado().getIdUsuario(), actividad_seleccionada);
+            modelo.RealizarInscripcion(Sesion.getUsuarioLogado().getIdUsuario(), actividad_seleccionada);
             JOptionPane.showMessageDialog(vista, "Inscripcion realizada correctamente.");
             MostrarActividadesDisponibles();
         } else {
@@ -130,7 +141,7 @@ public class AlumnoControl implements ActionListener {
     private void MostrarMisActividades() {
         //VistaListaActividadesAlumno misActividades = new VistaListaActividadesAlumno(this);
         VistaListaActividadesA misActividades = new VistaListaActividadesA(this);
-        ArrayList<Actividad> activ = accesobd.consultaActividadesAlumno(Sesion.getUsuarioLogado().getIdUsuario());
+        ArrayList<Actividad> activ = modelo.consultaActividadesAlumno(Sesion.getUsuarioLogado().getIdUsuario());
         misActividades.setTitulo("Mis Actividades / Inscripciones");
         misActividades.MostrarBotonInscripcion("N");
         misActividades.MostrarBotonBorrar("S");
@@ -143,7 +154,7 @@ public class AlumnoControl implements ActionListener {
      */
     private void MostrarDatosPersonales() {
         VistaDatosAlumno panelDatosAlumno = new VistaDatosAlumno(this);
-        Usuario datosAlumno =  accesobd.getUsuarioById(Sesion.getUsuarioLogado().getIdUsuario());
+        Usuario datosAlumno =  modelo.getUsuarioById(Sesion.getUsuarioLogado().getIdUsuario());
         panelDatosAlumno.setDatosAlumno(datosAlumno);             
         vista.setPanel(panelDatosAlumno);           
     }
@@ -154,7 +165,7 @@ public class AlumnoControl implements ActionListener {
     private void MostrarActividadesDisponibles() {
         //Se crea como JPanel para pasarselo a la vista
         VistaListaActividadesA panelListaActividades = new VistaListaActividadesA(this);
-        ArrayList<Actividad> actividades = accesobd.consultaActividadesDisponibles(Sesion.getUsuarioLogado().getIdUsuario());
+        ArrayList<Actividad> actividades = modelo.consultaActividadesDisponibles(Sesion.getUsuarioLogado().getIdUsuario());
         //Esto convierte el JPanel a VistaListaActividades para poder llamar a sus metodos
         panelListaActividades.setTitulo("Actividades Disponibles");
         panelListaActividades.MostrarBotonInscripcion("S");
@@ -170,6 +181,9 @@ public class AlumnoControl implements ActionListener {
     private void GuardarDatosPersonales() {
         VistaDatosAlumno panelDatosAlumno = (VistaDatosAlumno)vista.getPanel();
         Usuario datosAlumno = panelDatosAlumno.getDatosAlumno(); 
+        Usuario usuarioGuardado = modelo.GuardarDatosPersonales(datosAlumno);
+        Sesion.setUsuarioLogado(usuarioGuardado);
+        
         JOptionPane.showMessageDialog(vista, "Datos guardados correctamente.");
     }
 }

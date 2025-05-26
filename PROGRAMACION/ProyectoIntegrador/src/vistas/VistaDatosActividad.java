@@ -7,6 +7,9 @@ import javax.swing.JLabel;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
+import javax.swing.SpinnerDateModel;
+import javax.swing.text.DateFormatter;
+import javax.swing.text.MaskFormatter;
 
 import Controladores.MonitorControl;
 import Main.Sesion;
@@ -23,6 +26,8 @@ import java.sql.Date;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.Font;
+import javax.swing.JSpinner;
+import javax.swing.JFormattedTextField;
 
 /**
  * Vista que representa el formulario de entrada de datos para una actividad.
@@ -31,9 +36,9 @@ import java.awt.Font;
  */
 public class VistaDatosActividad extends JPanel {
 	private JTextField txtNombreActividad;
-	private JTextField txtFecha;
-	private JTextField txtHora;
-	private JTextField txtDuracion;
+	//private JTextField txtFecha;
+	//private JTextField txtHora;
+	//private JTextField txtDuracion;
 	private JTextField txtPlazas;
 	private JLabel lblNewLabel_5;
 	private JButton btnGuardar;
@@ -44,23 +49,27 @@ public class VistaDatosActividad extends JPanel {
 	private JButton btnVolver;
 	private MonitorControl controlador;
 	private JLabel lblTitulo;
+	private JFormattedTextField txtDuracion;
+	private JFormattedTextField txtHora;
+	private JFormattedTextField txtFecha;
 	
 	/**
 	 * Constructor de la clase VistaDatosActividad.
 	 * Inicializa todos los componentes del formulario y establece los listeners.
 	 * 
 	 * @param control controlador que gestiona los eventos de los botones
+	 * @throws ParseException 
 	 */
 	
-	public VistaDatosActividad(MonitorControl control) {
+	public VistaDatosActividad(MonitorControl control)  {
 		this.controlador = control;
 		
 		
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{0, 13, 75, 47, 40, 209, 62, 0, 49, 20};
+		gridBagLayout.columnWidths = new int[]{0, 13, 75, 67, 40, 209, 62, 0, 49, 20};
 		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10};
-		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
@@ -82,6 +91,7 @@ public class VistaDatosActividad extends JPanel {
 		add(lblNewLabel_8, gbc_lblNewLabel_8);
 		
 		lblNewLabel_7 = new JLabel("ID:");
+		lblNewLabel_7.setVisible(false);
 		GridBagConstraints gbc_lblNewLabel_7 = new GridBagConstraints();
 		gbc_lblNewLabel_7.anchor = GridBagConstraints.WEST;
 		gbc_lblNewLabel_7.insets = new Insets(0, 0, 5, 5);
@@ -90,6 +100,7 @@ public class VistaDatosActividad extends JPanel {
 		add(lblNewLabel_7, gbc_lblNewLabel_7);
 		
 		txtActividadId = new JTextField();
+		txtActividadId.setVisible(false);
 		txtActividadId.setText("0");
 		txtActividadId.setEditable(false);
 		GridBagConstraints gbc_txtActividadId = new GridBagConstraints();
@@ -133,7 +144,20 @@ public class VistaDatosActividad extends JPanel {
 		gbc_lblNewLabel_1.gridy = 5;
 		add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		txtFecha = new JTextField();
+		
+		  // Formato de hora
+		
+				try {
+					MaskFormatter maskFecha;
+					maskFecha = new MaskFormatter("####-##-##");
+					txtFecha = new JFormattedTextField(maskFecha);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		
+		
+		//txtFecha = new JTextField();
 		txtFecha.setText("yyyy-mm-dd");
 		GridBagConstraints gbc_txtFecha = new GridBagConstraints();
 		gbc_txtFecha.gridwidth = 3;
@@ -153,8 +177,24 @@ public class VistaDatosActividad extends JPanel {
 		gbc_lblNewLabel_2.gridy = 6;
 		add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		txtHora = new JTextField();
-		txtHora.setText("hh:mm:ss");
+		
+		
+		  // Formato de hora
+		MaskFormatter mask;
+		try {
+			mask = new MaskFormatter("##:##:##");
+			txtHora = new JFormattedTextField(mask);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        // Campo con formato
+        
+		
+		
+		//txtHora = new JTextField();
+		//txtHora.setText("hh:mm:ss");
 		GridBagConstraints gbc_txtHora = new GridBagConstraints();
 		gbc_txtHora.gridwidth = 3;
 		gbc_txtHora.insets = new Insets(0, 0, 5, 5);
@@ -172,15 +212,33 @@ public class VistaDatosActividad extends JPanel {
 		gbc_lblNewLabel_3.gridy = 7;
 		add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
-		txtDuracion = new JTextField();
-		GridBagConstraints gbc_txtDuracion = new GridBagConstraints();
-		gbc_txtDuracion.gridwidth = 3;
-		gbc_txtDuracion.insets = new Insets(0, 0, 5, 5);
-		gbc_txtDuracion.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtDuracion.gridx = 4;
-		gbc_txtDuracion.gridy = 7;
-		add(txtDuracion, gbc_txtDuracion);
-		txtDuracion.setColumns(10);
+//		txtDuracion = new JTextField();
+//		GridBagConstraints gbc_txtDuracion = new GridBagConstraints();
+//		gbc_txtDuracion.insets = new Insets(0, 0, 5, 5);
+//		gbc_txtDuracion.fill = GridBagConstraints.HORIZONTAL;
+//		gbc_txtDuracion.gridx = 4;
+//		gbc_txtDuracion.gridy = 7;
+//		add(txtDuracion, gbc_txtDuracion);
+//		txtDuracion.setColumns(10);
+		
+		
+		 try {
+	            MaskFormatter formatter = new MaskFormatter("##");
+	            formatter.setPlaceholderCharacter('_');
+	            txtDuracion = new JFormattedTextField(formatter);
+	        } catch (ParseException e) {
+	            e.printStackTrace(); 
+	        }
+		
+		GridBagConstraints gbc_formattedTextField = new GridBagConstraints();
+		gbc_formattedTextField.insets = new Insets(0, 0, 5, 5);
+		gbc_formattedTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_formattedTextField.gridx = 4;
+		gbc_formattedTextField.gridy = 7;
+		add(txtDuracion, gbc_formattedTextField);
+
+		
+		
 		
 		JLabel lblNewLabel_4 = new JLabel("Plazas:");
 		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
@@ -190,9 +248,19 @@ public class VistaDatosActividad extends JPanel {
 		gbc_lblNewLabel_4.gridy = 8;
 		add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
-		txtPlazas = new JTextField();
+		
+		try {
+            MaskFormatter formatter = new MaskFormatter("##");
+            formatter.setPlaceholderCharacter('_');
+            txtPlazas = new JFormattedTextField(formatter);
+        } catch (ParseException e) {
+            e.printStackTrace(); 
+        }
+		
+		
+		
+		//txtPlazas = new JTextField();
 		GridBagConstraints gbc_txtPlazas = new GridBagConstraints();
-		gbc_txtPlazas.gridwidth = 3;
 		gbc_txtPlazas.insets = new Insets(0, 0, 5, 5);
 		gbc_txtPlazas.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPlazas.gridx = 4;
@@ -210,7 +278,6 @@ public class VistaDatosActividad extends JPanel {
 		
 		txtSala = new JTextField();
 		GridBagConstraints gbc_txtSala = new GridBagConstraints();
-		gbc_txtSala.gridwidth = 3;
 		gbc_txtSala.insets = new Insets(0, 0, 5, 5);
 		gbc_txtSala.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtSala.gridx = 4;
@@ -220,6 +287,8 @@ public class VistaDatosActividad extends JPanel {
 		
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.addActionListener(control);
+		
+		 SpinnerDateModel model = new SpinnerDateModel();
 		btnGuardar.setActionCommand("GUARDAR_ACTIVIDAD");
 		
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
@@ -258,6 +327,7 @@ public class VistaDatosActividad extends JPanel {
 		txtDuracion.setText(String.valueOf(a.getDuracion()));
 		txtFecha.setText(a.getFecha().toString());
 		txtHora.setText(a.getHora().toString());
+		
 		txtNombreActividad.setText(a.getNombre());
 		txtPlazas.setText(String.valueOf(a.getParticipantesMax()));
 		txtSala.setText(String.valueOf(a.getIdSala()));
