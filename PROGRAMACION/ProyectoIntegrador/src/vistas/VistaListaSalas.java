@@ -74,40 +74,40 @@ public class VistaListaSalas extends JPanel {
         gbc_scrollPane.gridy = 3;
         add(scrollPane, gbc_scrollPane); 
         
-                btnEditar = new JButton("Editar");
-                btnEditar.addActionListener(control);
-                
-                        btnNuevo = new JButton("Nuevo");
-                        btnNuevo.addActionListener(control);
-                        btnNuevo.setActionCommand("NUEVA_SALA");
-                        GridBagConstraints gbc_btnNuevo = new GridBagConstraints();
-                        gbc_btnNuevo.anchor = GridBagConstraints.EAST;
-                        gbc_btnNuevo.insets = new Insets(0, 0, 5, 5);
-                        gbc_btnNuevo.gridx = 4;
-                        gbc_btnNuevo.gridy = 8;
-                        add(btnNuevo, gbc_btnNuevo);
-                btnEditar.setActionCommand("EDITAR_SALA");
-                GridBagConstraints gbc_btnEditar = new GridBagConstraints();
-                gbc_btnEditar.anchor = GridBagConstraints.EAST;
-                gbc_btnEditar.insets = new Insets(0, 0, 5, 5);
-                gbc_btnEditar.gridx = 5;
-                gbc_btnEditar.gridy = 8;
-                add(btnEditar, gbc_btnEditar);
+//                btnEditar = new JButton("Editar");
+//                btnEditar.addActionListener(control);
+//                
+//                        btnNuevo = new JButton("Nuevo");
+//                        btnNuevo.addActionListener(control);
+//                        btnNuevo.setActionCommand("NUEVA_SALA");
+//                        GridBagConstraints gbc_btnNuevo = new GridBagConstraints();
+//                        gbc_btnNuevo.anchor = GridBagConstraints.EAST;
+//                        gbc_btnNuevo.insets = new Insets(0, 0, 5, 5);
+//                        gbc_btnNuevo.gridx = 4;
+//                        gbc_btnNuevo.gridy = 8;
+//                        add(btnNuevo, gbc_btnNuevo);
+//                btnEditar.setActionCommand("EDITAR_SALA");
+//                GridBagConstraints gbc_btnEditar = new GridBagConstraints();
+//                gbc_btnEditar.anchor = GridBagConstraints.EAST;
+//                gbc_btnEditar.insets = new Insets(0, 0, 5, 5);
+//                gbc_btnEditar.gridx = 5;
+//                gbc_btnEditar.gridy = 8;
+//                add(btnEditar, gbc_btnEditar);
 
         String[] columnas = { "ID", "Codigo Sala", "Tipo Sala", "Capacidad Sala", "Utilizacion", "Ocupacion"};
         DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
         table.setModel(modelo);
         
-                btnBorrar = new JButton("Borrar");
-                btnBorrar.addActionListener(control);
-                btnBorrar.setActionCommand("BORRAR_SALA");
-                GridBagConstraints gbc_btnBorrar = new GridBagConstraints();
-                gbc_btnBorrar.anchor = GridBagConstraints.EAST;
-                gbc_btnBorrar.insets = new Insets(0, 0, 5, 5);
-                gbc_btnBorrar.gridx = 6;
-                gbc_btnBorrar.gridy = 8;
-                add(btnBorrar, gbc_btnBorrar);
-    }
+//                btnBorrar = new JButton("Borrar");
+//                btnBorrar.addActionListener(control);
+//                btnBorrar.setActionCommand("BORRAR_SALA");
+//                GridBagConstraints gbc_btnBorrar = new GridBagConstraints();
+//                gbc_btnBorrar.anchor = GridBagConstraints.EAST;
+//                gbc_btnBorrar.insets = new Insets(0, 0, 5, 5);
+//                gbc_btnBorrar.gridx = 6;
+//                gbc_btnBorrar.gridy = 8;
+//                add(btnBorrar, gbc_btnBorrar);
+  }
 
     /**
      * Devuelve el identificador de la sala seleccionada en la tabla.

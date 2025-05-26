@@ -110,54 +110,54 @@ public class MonitorControl implements ActionListener {
         vista.setPanel(panelSalas);
     }
 
-    /**
-     * Crea un nuevo formulario para registrar una sala.
-     */
-    private void NuevaSala() {
-        VistaDatosSala datosSala = new VistaDatosSala(this);
-        datosSala.setTitulo("Crear Nueva Sala");
-        vista.setPanel(datosSala);
-    }
-
-    /**
-     * Borra una sala seleccionada por el usuario.
-     * Si no se selecciona ninguna, no hace nada.
-     */
-    private void BorrarSala() {
-        VistaListaSalas panelSalas = (VistaListaSalas) vista.getPanel();
-        Integer id_sala = panelSalas.getSalaSelecionada();
-        if (id_sala != 0) {
-            modelo.BorrarSala(id_sala);
-            VerSalas();
-        }
-    }
-
-    /**
-     * Guarda una nueva sala o actualiza una existente.
-     * Recupera los datos desde el panel actual.
-     */
-    private void GuardarSala() {
-        VistaDatosSala datosSala = (VistaDatosSala) vista.getPanel();
-        Sala sala = datosSala.getDatosSala();
-        modelo.GuardarSala(sala);
-        VerSalas();
-    }
-
-    /**
-     * Muestra un formulario para editar los datos de una sala existente.
-     * Recupera la sala seleccionada por el usuario y carga sus datos.
-     */
-    private void EditarSala() {
-        VistaListaSalas panelListaSalas = (VistaListaSalas) vista.getPanel();
-        Integer id_sala = panelListaSalas.getSalaSelecionada();
-
-        VistaDatosSala editarPanel = new VistaDatosSala(this);
-        editarPanel.setTitulo("Modificar Datos Sala");
-        if (id_sala != 0) {
-            editarPanel.setDatosSala(modelo.getSalaById(id_sala));
-            vista.setPanel(editarPanel);
-        }
-    }
+//    /**
+//     * Crea un nuevo formulario para registrar una sala.
+//     */
+//    private void NuevaSala() {
+//        VistaDatosSala datosSala = new VistaDatosSala(this);
+//        datosSala.setTitulo("Crear Nueva Sala");
+//        vista.setPanel(datosSala);
+//    }
+//
+//    /**
+//     * Borra una sala seleccionada por el usuario.
+//     * Si no se selecciona ninguna, no hace nada.
+//     */
+//    private void BorrarSala() {
+//        VistaListaSalas panelSalas = (VistaListaSalas) vista.getPanel();
+//        Integer id_sala = panelSalas.getSalaSelecionada();
+//        if (id_sala != 0) {
+//            modelo.BorrarSala(id_sala);
+//            VerSalas();
+//        }
+//    }
+//
+//    /**
+//     * Guarda una nueva sala o actualiza una existente.
+//     * Recupera los datos desde el panel actual.
+//     */
+//    private void GuardarSala() {
+//        VistaDatosSala datosSala = (VistaDatosSala) vista.getPanel();
+//        Sala sala = datosSala.getDatosSala();
+//        modelo.GuardarSala(sala);
+//        VerSalas();
+//    }
+//
+//    /**
+//     * Muestra un formulario para editar los datos de una sala existente.
+//     * Recupera la sala seleccionada por el usuario y carga sus datos.
+//     */
+//    private void EditarSala() {
+//        VistaListaSalas panelListaSalas = (VistaListaSalas) vista.getPanel();
+//        Integer id_sala = panelListaSalas.getSalaSelecionada();
+//
+//        VistaDatosSala editarPanel = new VistaDatosSala(this);
+//        editarPanel.setTitulo("Modificar Datos Sala");
+//        if (id_sala != 0) {
+//            editarPanel.setDatosSala(modelo.getSalaById(id_sala));
+//            vista.setPanel(editarPanel);
+//        }
+//    }
 
     /**
      * Elimina una actividad seleccionada por el monitor.
